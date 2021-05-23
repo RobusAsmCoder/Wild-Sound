@@ -1,0 +1,33 @@
+PCAD Importer Log
+Project : ay-arm-bot.PRJPCB
+
+Section : D:\KEIL.PRJ\STM_AYX32_TSL\DOC\SCHEMATIC\ALTIUM\TRANS\Pro\ay-arm-bot.pcb
+    Section : Load Messages
+        Warning - 1 : Skipping Token attachedSymbol On Line 255
+        Warning - 1 : Skipping Token attachedSymbol On Line 347
+        Warning - 1 : Skipping Token refPointSize On Line 582
+        Warning - 1 : Skipping Token infoPointSize On Line 583
+        Warning - 1 : Skipping Token gluePointSize On Line 584
+        Warning - 1 : Skipping Token pickPointSize On Line 585
+        Warning - 1 : Skipping Token testPointSize On Line 586
+        Warning - 1 : Skipping Token refPointSizePrint On Line 587
+        Warning - 1 : Skipping Token infoPointSizePrint On Line 588
+        Warning - 1 : Skipping Token gluePointSizePrint On Line 589
+        Warning - 1 : Skipping Token pickPointSizePrint On Line 590
+        Warning - 1 : Skipping Token testPointSizePrint On Line 591
+        Warning - 1 : Skipping Token solderFlowDirection On Line 592
+        Warning - 1 : Skipping Token globalCopperPourCutoutBackoffFlag On Line 593
+        Warning - 1 : Skipping Token useLegacyBackoffAlgorithm On Line 594
+        Warning - 1 : Skipping Token useLegacyCupourIslandGenerationAlgorithm On Line 595
+        Warning - 1 : Skipping Token drillSymSettings On Line 736
+        Warning - 1 : Skipping Token gerberSettings On Line 738
+        Warning - 1 : Skipping Token ncDrillSettings On Line 752
+        Warning - 1 : Skipping Token programState On Line 761
+        Warning - 1 : Skipping Token displayDrawOrder On Line 802
+        Warning - 1 : Skipping Token reportSettings On Line 1025
+        Warning - 1 : Skipping Token odbSettings On Line 1768
+    EndSection
+
+    Section : Import Messages
+    EndSection
+EndSection

@@ -1,0 +1,54 @@
+;Universal Executer For Loader Restart
+;Run At Any Memory Exclude 23552..24068(DOS.STACK) !!!
+
+        EQU $ASAM.PASS.ERROR=3
+
+        Include "loader.inc"
+;        Include "asam_l.az8"
+        Include "DOS\doslzsa.inc"
+
+;HL = (LOA.SAV_TRK)       TRACK POS FOR LOADER
+; E = (LOA.SAV_DRV)     DRIVE NUMBER
+; D = (LOA.PTR_ZUAF)  OLD SCRIPT ZUAF EXECUTER
+CALLRET EQU 23296
+
+        ORG 0
+START   EQU $
+
+        DI
+
+        LD SP,DOS.STACK
+        PUSH HL DE
+        LD HL,0E9E1H       ;POP HL : JP (HL)
+        LD (CALLRET),HL
+        CALL CALLRET
+        LD DE,DOS_DOS-$
+        ADD HL,DE
+        LD DE,DOS.START
+        LD BC,DOS.SIZE
+        LDIR
+        POP DE
+        LD A,D
+        INC A
+        LD (LOA.PTR_ZUAF),A   ;NEXT LOAD
+        LD A,E
+        LD (LOA.SAV_DRV),A     ;SAVE DRIVE NUMBER
+        LD (DOS_DOS+(DOS_DRIVE_23830-DOS.START)),A
+        CALL DOS.INIT
+        POP HL
+        LD (LOA.SAV_TRK),HL      ;SAVE TRACK POS FOR LOADER
+        LD (23796),HL
+
+        LD HL,LOA.START
+        PUSH HL
+        LD B,LOA.B
+        JP DOS.LoadTR
+
+DOS_DOS    IncBIN "DOS\dos.bin"
+
+
+END     EQU $
+SIZE    EQU END-START
+
+        SaveBIN "CODE\loaexe.cod",START,SIZE
+        SaveLabels "%$ASAM.Compile.FileName%.txt"

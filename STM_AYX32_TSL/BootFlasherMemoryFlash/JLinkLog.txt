@@ -1,0 +1,37 @@
+
+T1798 000:197 SEGGER J-Link V4.70 Log File (0000ms, 0052ms total)
+T1798 000:197 DLL Compiled: May  7 2013 21:38:06 (0000ms, 0052ms total)
+T1798 000:197 Logging started @ 2020-01-20 00:35 (0000ms, 0052ms total)
+T1798 000:197 JLINK_SetWarnOutHandler(...) (0000ms, 0052ms total)
+T1798 000:197 JLINK_OpenEx(...)
+Firmware: J-Link ARM V8 compiled Dec  1 2015 11:42:48
+Hardware: V8.00
+S/N: 24554993
+Feature(s): RDI,FlashDL,FlashBP,JFlash,GDBFull  returns O.K. (0020ms, 0072ms total)
+T1798 000:217 JLINK_SetErrorOutHandler(...) (0000ms, 0072ms total)
+T1798 000:217 JLINK_ExecCommand("ProjectFile = "D:\KEIL.PRJ\STM_AYX32_TSL\BootFlasherMemoryFlash\JLinkSettings.ini"", ...)  returns 0x00 (0000ms, 0072ms total)
+T1798 000:217 JLINK_ExecCommand("Device = STM32F405RG", ...)
+                JLINK_AddMirrorAreaEx(Addr = 0x00000000, Size = 0x00000000) (0000ms, 0000ms total)
+              Device "STM32F405RG" selected (1024 KB flash, 128 KB RAM).  returns 0x00 (0001ms, 0073ms total)
+T1798 000:218 JLINK_ExecCommand("DisableConnectionTimeout", ...)  returns 0x00 (0000ms, 0073ms total)
+T1798 000:218 JLINK_GetHardwareVersion()  returns 0x13880 (0000ms, 0073ms total)
+T1798 000:218 JLINK_GetDLLVersion()  returns 47000 (0000ms, 0073ms total)
+T1798 000:218 JLINK_GetFirmwareString(...) (0000ms, 0073ms total)
+T1798 000:218 JLINK_GetDLLVersion()  returns 47000 (0000ms, 0073ms total)
+T1798 000:218 JLINK_GetCompileDateTime() (0000ms, 0073ms total)
+T1798 000:218 JLINK_GetFirmwareString(...) (0000ms, 0073ms total)
+T1798 000:218 JLINK_GetHardwareVersion()  returns 0x13880 (0001ms, 0074ms total)
+T1798 000:219 JLINK_TIF_Select(JLINKARM_TIF_SWD)  returns 0x00 (0002ms, 0076ms total)
+T1798 000:221 JLINK_SetSpeed(2000) (0001ms, 0077ms total)
+T1798 000:222 JLINK_SetResetType(JLINKARM_RESET_TYPE_ADI)  returns JLINKARM_RESET_TYPE_NORMAL (0000ms, 0077ms total)
+T1798 000:222 JLINK_Reset() >0x108 TIF>Found SWD-DP with ID 0x2BA01477 >0x0D TIF> >0x28 TIF> >0x0D TIF> >0x28 TIF> >0x0D TIF> >0x21 TIF> >0x0D TIF> >0x28 TIF> >0x0D TIF> >0x28 TIF> >0x0D TIF> >0x28 TIF> >0x0D TIF> >0x21 TIF> >0x0D TIF> >0x21 TIF> >0x0D TIF> >0x28 TIF> >0x0D TIF> >0x21 TIF> >0x0D TIF> >0x21 TIF> >0x0D TIF> >0x28 TIF> >0x0D TIF> >0x21 TIF> >0x0D TIF> >0x21 TIF> >0x108 TIF>Found SWD-DP with ID 0x2BA01477 >0x0D TIF> >0x21 TIF> >0x0D TIF> >0x28 TIF> >0x0D TIF> >0x28 TIF> >0x0D TIF> >0x21 TIF>
+ >0x0D TIF> >0x21 TIF> >0x0D TIF> >0x28 TIF> >0x0D TIF> >0x21 TIF> >0x0D TIF> >0x21 TIF> >0x0D TIF> >0x21 TIF> >0x0D TIF> >0x21 TIF> >0x0D TIF> >0x28 TIF> >0x0D TIF> >0x21 TIF> >0x0D TIF> >0x28 TIF> >0x0D TIF> >0x28 TIF> >0x0D TIF> >0x21 TIF> >0x0D TIF> >0x21 TIF> >0x0D TIF> >0x28 TIF> >0x0D TIF> >0x21 TIF> >0x0D TIF> >0x21 TIF> >0x0D TIF> >0x28 TIF> >0x0D TIF> >0x28 TIF> >0x0D TIF> >0x28 TIF> >0x0D TIF> >0x21 TIF> >0x0D TIF> >0x21 TIF> >0x0D TIF> >0x28 TIF> >0x0D TIF> >0x28 TIF> >0x0D TIF> >0x28 TIF>
+ >0x0D TIF> >0x21 TIF> >0x0D TIF> >0x21 TIF> >0x0D TIF> >0x21 TIF>TPIU fitted.ETM fitted. >0x0D TIF> >0x28 TIF> >0x0D TIF> >0x21 TIF> >0x0D TIF> >0x21 TIF> >0x0D TIF> >0x28 TIF> >0x0D TIF> >0x21 TIF> >0x0D TIF> >0x21 TIF>FPUnit: 6 code (BP) slots and 2 literal slots >0x0D TIF> >0x28 TIF> >0x0D TIF> >0x21 TIF> >0x0D TIF> >0x21 TIF> >0x0D TIF> >0x28 TIF> >0x0D TIF> >0x21 TIF> >0x0D TIF> >0x21 TIF> >0x0D TIF> >0x28 TIF> >0x0D TIF> >0x21 TIF> >0x0D TIF> >0x21 TIF> >0x0D TIF> >0x28 TIF> >0x0D TIF> >0x21 TIF>
+ >0x0D TIF> >0x21 TIF>Found Cortex-M4 r0p1, Little endian. >0x0D TIF> >0x28 TIF> -- CPU is running >0x0D TIF> >0x28 TIF> >0x1A2 TIF> >0x0D TIF> >0x28 TIF> -- CPU is running >0x0D TIF> >0x28 TIF> >0x1A2 TIF> >0x0D TIF> >0x28 TIF> -- CPU is running >0x0D TIF> >0x28 TIF> >0x1A0 TIF> >0x0D TIF> >0x28 TIF> >0x11E4 TIF> >0x0D TIF> >0x28 TIF> >0x1A2 TIF> >0x0D TIF> >0x28 TIF> >0x0D TIF> >0x28 TIF> >0x1A2 TIF> >0x0D TIF> >0x28 TIF> >0x0D TIF> >0x28 TIF> >0x1A0 TIF> >0x0D TIF> >0x28 TIF> >0x0D TIF> >0x28 TIF>
+ >0x1A2 TIF> >0x0D TIF> >0x28 TIF> >0x0D TIF> >0x28 TIF> >0x1A2 TIF> >0x0D TIF> >0x28 TIF> >0x0D TIF> >0x28 TIF> >0x1A0 TIF> >0x0D TIF> >0x28 TIF> >0x0D TIF> >0x28 TIF> >0x1A0 TIF> >0x0D TIF> >0x28 TIF> >0x0D TIF> >0x28 TIF> >0x1A2 TIF> >0x0D TIF> >0x28 TIF> >0x0D TIF> >0x28 TIF> >0x1A2 TIF> >0x0D TIF> >0x28 TIF> -- CPU is running >0x0D TIF> >0x28 TIF> >0x1A0 TIF> >0x0D TIF> >0x28 TIF> -- CPU is running >0x0D TIF> >0x28 TIF> >0x1A0 TIF> >0x0D TIF> >0x28 TIF> >0x11E4 TIF> >0x0D TIF> >0x28 TIF> >0x1A2 TIF>
+ >0x0D TIF> >0x28 TIF> (0307ms, 0384ms total)
+T1798 000:529 JLINK_GetId() >0x0D TIF> >0x21 TIF>  returns 0x2BA01477 (0002ms, 0386ms total)
+T1798 000:532 JLINK_GetFirmwareString(...) (0000ms, 0386ms total)
+T1798 015:540 JLINK_Close() >0x0D TIF> >0x28 TIF> >0x1A2 TIF> >0x0D TIF> >0x28 TIF> >0x42 TIF> >0x28 TIF> >0x0D TIF> >0x21 TIF> (0016ms, 0402ms total)
+T1798 015:557 JLINK_Close() (0000ms, 0402ms total)
+T1798 015:557 JLINK_Close() (0000ms, 0402ms total)

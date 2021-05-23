@@ -1,0 +1,114 @@
+
+
+
+
+
+
+        .MAC_LZSA_PACKP ,
+         SaveBIN "?\LZSA\tmp89748258.tt0",$,@.0
+         EQU LZSA_FILE_SIZE=@.0
+         ;EXECFILE "?\LZSA\lzsa.exe -f2 -r -m2 ??\LZSA\tmp89748258.tt0 ??\LZSA\tmp89748258.tt1",1
+         ;EXECFILE "?\LZSA\lzsa102.exe -f2 -r ??\LZSA\tmp89748258.tt0 ??\LZSA\tmp89748258.tt1",1
+         ;EXECFILE "?\LZSA\%@.1% ??\LZSA\tmp89748258.tt0 ??\LZSA\tmp89748258.tt1",1
+         .%@.1=0,1,0%
+          EXECFILE "?\LZSA\lzsa.exe -f2 -r -m2 ??\LZSA\tmp89748258.tt0 ??\LZSA\tmp89748258.tt1",1
+         ..
+         .%@.1=1,1,0%
+          EXECFILE "?\LZSA\lzsa102.exe -f2 -r ??\LZSA\tmp89748258.tt0 ??\LZSA\tmp89748258.tt1",1
+         ..
+         ORG @.
+         IncBIN "?\LZSA\tmp89748258.tt1"
+         DW LZSA_FILE_SIZE
+         DW $-@.-2
+         EQU LZSA_PACK_SIZE=$-@.
+         SaveBIN "?\LZSA\tmp89748258.tt0",-1,-1
+         SaveBIN "?\LZSA\tmp89748258.tt1",-1,-1
+        ..
+
+        .MAC_LZSA_PACK 
+         MAC_LZSA_PACKP @.0,0
+        ..
+
+        .MAC_LZSA_PACK_OLD 
+         MAC_LZSA_PACKP @.0,1
+        ..
+
+        .MAC_LZSA_PACK_FILE_DSQ .
+         ;DSQ
+         IncBIN "%@.0%.%@.1%"
+         EQU @SIZE=$-@.
+         ORG @.
+         DSQ.Pack @SIZE
+         EQU @SIZE=$-@.
+         SaveBIN "%@.0%.DSQ", @., @SIZE
+        ..
+
+
+        .MAC_LZSA_PACK_FILE_BIN .
+         ;LZSA
+         IncBIN "%@.0%.%@.1%"
+         EQU @SIZE=$-@.
+         ORG @.
+         MAC_LZSA_PACK @SIZE
+         SaveBIN "%@.0%.BIN", @., LZSA_PACK_SIZE
+        ..
+
+        .MAC_LZSA_PACK_FILE_BIM_OLD .
+         ;LZSA
+         IncBIN "%@.0%.%@.1%"
+         EQU @SIZE=$-@.
+         ORG @.
+         MAC_LZSA_PACK_OLD @SIZE
+         SaveBIN "%@.0%.BIM", @., LZSA_PACK_SIZE
+        ..
+
+        .MAC_LZSA_PACK_FILE_DSQ_BIN .
+         MAC_LZSA_PACK_FILE_DSQ @.0.@.1
+         ORG @.
+         MAC_LZSA_PACK_FILE_BIN @.0.@.1
+        ..
+
+
+        .MAC_LZSA_PREPARE_FROM_END_MOVE
+         PUSH DE
+
+         LD B,(HL)
+         DEC HL
+         LD C,(HL)
+         DEC HL
+         PUSH BC
+         LD B,(HL)
+         DEC HL
+         LD C,(HL)
+         DEC HL
+
+         EX DE,HL
+         ADD HL,BC
+         LD BC,7  ;INC HL
+         ADD HL,BC;INC HL
+         ;DEC HL   ;INC HL
+         EX DE,HL
+         POP BC
+         LDDR
+         EX DE,HL
+         INC HL
+
+         POP DE
+        ..
+
+        .MAC_LZSA_PREPARE_FROM_END
+         LD B,(HL)
+         DEC HL
+         LD C,(HL)
+         DEC HL
+         SCF;DEC HL
+         SBC HL,BC
+        ..
+        .MAC_LZSA_DEPACK_SMALL
+         Include "?\LZSA\unlzsa2_small_v2.AZ8"
+        ..
+        .MAC_LZSA_DEPACK_FAST
+         Include "?\LZSA\unlzsa2_fast_v1.AZ8"
+        ..
+
+

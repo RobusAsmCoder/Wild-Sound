@@ -1,0 +1,129 @@
+PCAD Importer Log
+Project : ayx-32-40.PRJPCB
+
+Section : D:\KEIL.PRJ\STM_AYX32_TSL\DOC\SCHEMATIC\ALTIUM\TRANS\Lite\ayx-32-40.pcb
+    Section : Load Messages
+        Warning - 1 : Skipping Token defaultPinDes On Line 1385
+        Warning - 1 : Skipping Token defaultPinDes On Line 1386
+        Warning - 1 : Skipping Token defaultPinDes On Line 1422
+        Warning - 1 : Skipping Token defaultPinDes On Line 1423
+        Warning - 1 : Skipping Token defaultPinDes On Line 1424
+        Warning - 1 : Skipping Token defaultPinDes On Line 1425
+        Warning - 1 : Skipping Token defaultPinDes On Line 1426
+        Warning - 1 : Skipping Token defaultPinDes On Line 1427
+        Warning - 1 : Skipping Token defaultPinDes On Line 1428
+        Warning - 1 : Skipping Token defaultPinDes On Line 1429
+        Warning - 1 : Skipping Token defaultPinDes On Line 1430
+        Warning - 1 : Skipping Token defaultPinDes On Line 1431
+        Warning - 1 : Skipping Token defaultPinDes On Line 1432
+        Warning - 1 : Skipping Token defaultPinDes On Line 1433
+        Warning - 1 : Skipping Token defaultPinDes On Line 1434
+        Warning - 1 : Skipping Token defaultPinDes On Line 1435
+        Warning - 1 : Skipping Token defaultPinDes On Line 1436
+        Warning - 1 : Skipping Token defaultPinDes On Line 1437
+        Warning - 1 : Skipping Token defaultPinDes On Line 1438
+        Warning - 1 : Skipping Token defaultPinDes On Line 1439
+        Warning - 1 : Skipping Token defaultPinDes On Line 1440
+        Warning - 1 : Skipping Token defaultPinDes On Line 1441
+        Warning - 1 : Skipping Token defaultPinDes On Line 1442
+        Warning - 1 : Skipping Token defaultPinDes On Line 1443
+        Warning - 1 : Skipping Token defaultPinDes On Line 1444
+        Warning - 1 : Skipping Token defaultPinDes On Line 1445
+        Warning - 1 : Skipping Token defaultPinDes On Line 1446
+        Warning - 1 : Skipping Token defaultPinDes On Line 1447
+        Warning - 1 : Skipping Token defaultPinDes On Line 1448
+        Warning - 1 : Skipping Token defaultPinDes On Line 1449
+        Warning - 1 : Skipping Token defaultPinDes On Line 1450
+        Warning - 1 : Skipping Token defaultPinDes On Line 1451
+        Warning - 1 : Skipping Token defaultPinDes On Line 1452
+        Warning - 1 : Skipping Token defaultPinDes On Line 1453
+        Warning - 1 : Skipping Token defaultPinDes On Line 1454
+        Warning - 1 : Skipping Token defaultPinDes On Line 1455
+        Warning - 1 : Skipping Token defaultPinDes On Line 1456
+        Warning - 1 : Skipping Token defaultPinDes On Line 1457
+        Warning - 1 : Skipping Token defaultPinDes On Line 1458
+        Warning - 1 : Skipping Token defaultPinDes On Line 1459
+        Warning - 1 : Skipping Token defaultPinDes On Line 1460
+        Warning - 1 : Skipping Token defaultPinDes On Line 1461
+        Warning - 1 : Skipping Token defaultPinDes On Line 1462
+        Warning - 1 : Skipping Token defaultPinDes On Line 1463
+        Warning - 1 : Skipping Token defaultPinDes On Line 1464
+        Warning - 1 : Skipping Token defaultPinDes On Line 1465
+        Warning - 1 : Skipping Token defaultPinDes On Line 1466
+        Warning - 1 : Skipping Token defaultPinDes On Line 1467
+        Warning - 1 : Skipping Token defaultPinDes On Line 1468
+        Warning - 1 : Skipping Token defaultPinDes On Line 1469
+        Warning - 1 : Skipping Token defaultPinDes On Line 1470
+        Warning - 1 : Skipping Token defaultPinDes On Line 1471
+        Warning - 1 : Skipping Token defaultPinDes On Line 1472
+        Warning - 1 : Skipping Token defaultPinDes On Line 1473
+        Warning - 1 : Skipping Token defaultPinDes On Line 1474
+        Warning - 1 : Skipping Token defaultPinDes On Line 1475
+        Warning - 1 : Skipping Token defaultPinDes On Line 1476
+        Warning - 1 : Skipping Token defaultPinDes On Line 1477
+        Warning - 1 : Skipping Token defaultPinDes On Line 1478
+        Warning - 1 : Skipping Token defaultPinDes On Line 1479
+        Warning - 1 : Skipping Token defaultPinDes On Line 1480
+        Warning - 1 : Skipping Token defaultPinDes On Line 1481
+        Warning - 1 : Skipping Token defaultPinDes On Line 1482
+        Warning - 1 : Skipping Token defaultPinDes On Line 1483
+        Warning - 1 : Skipping Token defaultPinDes On Line 1484
+        Warning - 1 : Skipping Token defaultPinDes On Line 1485
+        Warning - 1 : Skipping Token defaultPinDes On Line 1538
+        Warning - 1 : Skipping Token defaultPinDes On Line 1539
+        Warning - 1 : Skipping Token defaultPinDes On Line 1540
+        Warning - 1 : Skipping Token defaultPinDes On Line 1541
+        Warning - 1 : Skipping Token defaultPinDes On Line 1542
+        Warning - 1 : Skipping Token attachedSymbol On Line 1661
+        Warning - 1 : Skipping Token attachedSymbol On Line 1683
+        Warning - 1 : Skipping Token attachedSymbol On Line 1705
+        Warning - 1 : Skipping Token attachedSymbol On Line 1726
+        Warning - 1 : Skipping Token attachedSymbol On Line 1750
+        Warning - 1 : Skipping Token attachedSymbol On Line 1835
+        Warning - 1 : Skipping Token attachedSymbol On Line 1955
+        Warning - 1 : Skipping Token attachedSymbol On Line 2014
+        Warning - 1 : Skipping Token attachedSymbol On Line 2038
+        Warning - 1 : Skipping Token refPointSize On Line 2474
+        Warning - 1 : Skipping Token infoPointSize On Line 2475
+        Warning - 1 : Skipping Token gluePointSize On Line 2476
+        Warning - 1 : Skipping Token pickPointSize On Line 2477
+        Warning - 1 : Skipping Token testPointSize On Line 2478
+        Warning - 1 : Skipping Token refPointSizePrint On Line 2479
+        Warning - 1 : Skipping Token infoPointSizePrint On Line 2480
+        Warning - 1 : Skipping Token gluePointSizePrint On Line 2481
+        Warning - 1 : Skipping Token pickPointSizePrint On Line 2482
+        Warning - 1 : Skipping Token testPointSizePrint On Line 2483
+        Warning - 1 : Skipping Token solderFlowDirection On Line 2484
+        Warning - 1 : Skipping Token globalCopperPourCutoutBackoffFlag On Line 2485
+        Warning - 1 : Skipping Token useLegacyBackoffAlgorithm On Line 2486
+        Warning - 1 : Skipping Token useLegacyCupourIslandGenerationAlgorithm On Line 2487
+        Warning - 1 : Skipping Token netNameRef On Line 3258
+        Warning - 1 : Skipping Token island On Line 3260
+        Warning - 1 : Skipping Token island On Line 3309
+        Warning - 1 : Skipping Token island On Line 3323
+        Warning - 1 : Skipping Token island On Line 3357
+        Warning - 1 : Skipping Token island On Line 3406
+        Warning - 1 : Skipping Token island On Line 3426
+        Warning - 1 : Skipping Token island On Line 3477
+        Warning - 1 : Skipping Token island On Line 3505
+        Warning - 1 : Skipping Token island On Line 3573
+        Warning - 1 : Skipping Token island On Line 4444
+        Warning - 1 : Skipping Token netNameRef On Line 5385
+        Warning - 1 : Skipping Token island On Line 5387
+        Warning - 1 : Skipping Token netNameRef On Line 5433
+        Warning - 1 : Skipping Token island On Line 5435
+        Warning - 1 : Skipping Token island On Line 5458
+        Warning - 1 : Skipping Token drillSymSettings On Line 6598
+        Warning - 1 : Skipping Token gerberSettings On Line 6603
+        Warning - 1 : Skipping Token ncDrillSettings On Line 7325
+        Warning - 1 : Skipping Token programState On Line 7348
+        Warning - 1 : Skipping Token displayDrawOrder On Line 7389
+        Warning - 1 : Skipping Token reportSettings On Line 7612
+        Warning - 1 : Skipping Token odbSettings On Line 8339
+    EndSection
+
+    Section : Import Messages
+        Warning - 0 : PCAD Pattern Graphics [JUMPER][Primary] associated with PCAD Component [JUMPER] has been renamed to PCB FootPrint [JUMPER_JUMPER(Primary)].
+        Warning - 0 : PCAD Pattern Graphics [WATCH-XTAL][Primary] associated with PCAD Component [CRYSTAL-WATCH] has been renamed to PCB FootPrint [WATCH-XTAL_CRYSTAL-WATCH(Primary)].
+    EndSection
+EndSection

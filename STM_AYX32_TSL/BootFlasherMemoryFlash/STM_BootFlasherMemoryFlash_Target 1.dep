@@ -1,0 +1,317 @@
+Dependencies for Project 'STM_BootFlasherMemoryFlash', Target 'Target 1': (DO NOT MODIFY !)
+F (.\startup_stm32f10x_ld_vl.s)(0x532C396A)(--cpu Cortex-M3 -g --apcs=interwork --pd "__MICROLIB SETA 1"-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F10x--list .\startup_stm32f10x_ld_vl.lst --xref -o .\startup_stm32f10x_ld_vl.o --depend .\startup_stm32f10x_ld_vl.d)
+F (.\SRC\main.c)(0x5A1043DD)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I.\SRC -I..\SRC -I..\SRC\LIB -I..\SRC\LIB\inc --c99-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F10x-o .\main.o --omf_browse .\main.crf --depend .\main.d)
+I (..\SRC\SysType.h)(0x58FFCA76)
+I (..\SRC\LIB\inc\stm32f10x_lib.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_map.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_conf.h)(0x580261D4)
+I (..\SRC\LIB\inc\stm32f10x_type.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\cortexm3_macro.h)(0x5379B6BC)
+I (..\SRC\LIB\inc\stm32f10x_adc.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_bkp.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_can.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_crc.h)(0x5379B6BA)
+I (..\SRC\LIB\inc\stm32f10x_dac.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_dbgmcu.h)(0x5379B6BC)
+I (..\SRC\LIB\inc\stm32f10x_dma.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_exti.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_flash.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_fsmc.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_gpio.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_i2c.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_iwdg.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_nvic.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_pwr.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_rcc.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_rtc.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_sdio.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_spi.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_systick.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_tim.h)(0x5379B6CA)
+I (..\SRC\LIB\inc\stm32f10x_usart.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_wwdg.h)(0x5379B6BC)
+I (..\SRC\stm_GpioBit.h)(0x5803C5EA)
+I (..\SRC\STM32_Reg.h)(0x5379B6BE)
+I (..\SRC\rb_base64m.h)(0x58A276DC)
+F (..\SRC\LIB\cortexm3_macro.s)(0x5379B6BE)(--cpu Cortex-M3 -g --apcs=interwork --pd "__MICROLIB SETA 1"-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F10x--list .\cortexm3_macro.lst --xref -o .\cortexm3_macro.o --depend .\cortexm3_macro.d)
+F (..\SRC\LIB\stm32f10x_adc.c)(0x5379B6CC)(-c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I.\SRC -I..\SRC -I..\SRC\LIB -I..\SRC\LIB\inc --c99-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F10x-o .\stm32f10x_adc.o --omf_browse .\stm32f10x_adc.crf --depend .\stm32f10x_adc.d)
+I (..\SRC\LIB\inc\stm32f10x_adc.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_map.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_conf.h)(0x580261D4)
+I (..\SRC\LIB\inc\stm32f10x_type.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\cortexm3_macro.h)(0x5379B6BC)
+I (..\SRC\LIB\inc\stm32f10x_rcc.h)(0x5379B6C0)
+F (..\SRC\LIB\stm32f10x_bkp.c)(0x5379B6BE)(-c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I.\SRC -I..\SRC -I..\SRC\LIB -I..\SRC\LIB\inc --c99-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F10x-o .\stm32f10x_bkp.o --omf_browse .\stm32f10x_bkp.crf --depend .\stm32f10x_bkp.d)
+I (..\SRC\LIB\inc\stm32f10x_bkp.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_map.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_conf.h)(0x580261D4)
+I (..\SRC\LIB\inc\stm32f10x_type.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\cortexm3_macro.h)(0x5379B6BC)
+I (..\SRC\LIB\inc\stm32f10x_rcc.h)(0x5379B6C0)
+F (..\SRC\LIB\stm32f10x_can.c)(0x5379B6C2)(-c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I.\SRC -I..\SRC -I..\SRC\LIB -I..\SRC\LIB\inc --c99-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F10x-o .\stm32f10x_can.o --omf_browse .\stm32f10x_can.crf --depend .\stm32f10x_can.d)
+I (..\SRC\LIB\inc\stm32f10x_can.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_map.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_conf.h)(0x580261D4)
+I (..\SRC\LIB\inc\stm32f10x_type.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\cortexm3_macro.h)(0x5379B6BC)
+I (..\SRC\LIB\inc\stm32f10x_rcc.h)(0x5379B6C0)
+F (..\SRC\LIB\stm32f10x_crc.c)(0x5379B6BE)(-c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I.\SRC -I..\SRC -I..\SRC\LIB -I..\SRC\LIB\inc --c99-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F10x-o .\stm32f10x_crc.o --omf_browse .\stm32f10x_crc.crf --depend .\stm32f10x_crc.d)
+I (..\SRC\LIB\inc\stm32f10x_crc.h)(0x5379B6BA)
+I (..\SRC\LIB\inc\stm32f10x_map.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_conf.h)(0x580261D4)
+I (..\SRC\LIB\inc\stm32f10x_type.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\cortexm3_macro.h)(0x5379B6BC)
+F (..\SRC\LIB\stm32f10x_dac.c)(0x5379B6C0)(-c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I.\SRC -I..\SRC -I..\SRC\LIB -I..\SRC\LIB\inc --c99-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F10x-o .\stm32f10x_dac.o --omf_browse .\stm32f10x_dac.crf --depend .\stm32f10x_dac.d)
+I (..\SRC\LIB\inc\stm32f10x_dac.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_map.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_conf.h)(0x580261D4)
+I (..\SRC\LIB\inc\stm32f10x_type.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\cortexm3_macro.h)(0x5379B6BC)
+I (..\SRC\LIB\inc\stm32f10x_rcc.h)(0x5379B6C0)
+F (..\SRC\LIB\stm32f10x_dbgmcu.c)(0x5379B6BE)(-c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I.\SRC -I..\SRC -I..\SRC\LIB -I..\SRC\LIB\inc --c99-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F10x-o .\stm32f10x_dbgmcu.o --omf_browse .\stm32f10x_dbgmcu.crf --depend .\stm32f10x_dbgmcu.d)
+I (..\SRC\LIB\inc\stm32f10x_dbgmcu.h)(0x5379B6BC)
+I (..\SRC\LIB\inc\stm32f10x_map.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_conf.h)(0x580261D4)
+I (..\SRC\LIB\inc\stm32f10x_type.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\cortexm3_macro.h)(0x5379B6BC)
+F (..\SRC\LIB\stm32f10x_dma.c)(0x5379B6C2)(-c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I.\SRC -I..\SRC -I..\SRC\LIB -I..\SRC\LIB\inc --c99-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F10x-o .\stm32f10x_dma.o --omf_browse .\stm32f10x_dma.crf --depend .\stm32f10x_dma.d)
+I (..\SRC\LIB\inc\stm32f10x_dma.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_map.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_conf.h)(0x580261D4)
+I (..\SRC\LIB\inc\stm32f10x_type.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\cortexm3_macro.h)(0x5379B6BC)
+I (..\SRC\LIB\inc\stm32f10x_rcc.h)(0x5379B6C0)
+F (..\SRC\LIB\stm32f10x_exti.c)(0x5379B6BE)(-c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I.\SRC -I..\SRC -I..\SRC\LIB -I..\SRC\LIB\inc --c99-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F10x-o .\stm32f10x_exti.o --omf_browse .\stm32f10x_exti.crf --depend .\stm32f10x_exti.d)
+I (..\SRC\LIB\inc\stm32f10x_exti.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_map.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_conf.h)(0x580261D4)
+I (..\SRC\LIB\inc\stm32f10x_type.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\cortexm3_macro.h)(0x5379B6BC)
+F (..\SRC\LIB\stm32f10x_flash.c)(0x5379B6C2)(-c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I.\SRC -I..\SRC -I..\SRC\LIB -I..\SRC\LIB\inc --c99-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F10x-o .\stm32f10x_flash.o --omf_browse .\stm32f10x_flash.crf --depend .\stm32f10x_flash.d)
+I (..\SRC\LIB\inc\stm32f10x_flash.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_map.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_conf.h)(0x580261D4)
+I (..\SRC\LIB\inc\stm32f10x_type.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\cortexm3_macro.h)(0x5379B6BC)
+F (..\SRC\LIB\stm32f10x_fsmc.c)(0x5379B6C8)(-c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I.\SRC -I..\SRC -I..\SRC\LIB -I..\SRC\LIB\inc --c99-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F10x-o .\stm32f10x_fsmc.o --omf_browse .\stm32f10x_fsmc.crf --depend .\stm32f10x_fsmc.d)
+I (..\SRC\LIB\inc\stm32f10x_fsmc.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_map.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_conf.h)(0x580261D4)
+I (..\SRC\LIB\inc\stm32f10x_type.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\cortexm3_macro.h)(0x5379B6BC)
+I (..\SRC\LIB\inc\stm32f10x_rcc.h)(0x5379B6C0)
+F (..\SRC\LIB\stm32f10x_gpio.c)(0x5379B6C0)(-c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I.\SRC -I..\SRC -I..\SRC\LIB -I..\SRC\LIB\inc --c99-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F10x-o .\stm32f10x_gpio.o --omf_browse .\stm32f10x_gpio.crf --depend .\stm32f10x_gpio.d)
+I (..\SRC\LIB\inc\stm32f10x_gpio.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_map.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_conf.h)(0x580261D4)
+I (..\SRC\LIB\inc\stm32f10x_type.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\cortexm3_macro.h)(0x5379B6BC)
+I (..\SRC\LIB\inc\stm32f10x_rcc.h)(0x5379B6C0)
+F (..\SRC\LIB\stm32f10x_i2c.c)(0x5379B6CA)(-c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I.\SRC -I..\SRC -I..\SRC\LIB -I..\SRC\LIB\inc --c99-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F10x-o .\stm32f10x_i2c.o --omf_browse .\stm32f10x_i2c.crf --depend .\stm32f10x_i2c.d)
+I (..\SRC\LIB\inc\stm32f10x_i2c.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_map.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_conf.h)(0x580261D4)
+I (..\SRC\LIB\inc\stm32f10x_type.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\cortexm3_macro.h)(0x5379B6BC)
+I (..\SRC\LIB\inc\stm32f10x_rcc.h)(0x5379B6C0)
+F (..\SRC\LIB\stm32f10x_iwdg.c)(0x5379B6BE)(-c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I.\SRC -I..\SRC -I..\SRC\LIB -I..\SRC\LIB\inc --c99-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F10x-o .\stm32f10x_iwdg.o --omf_browse .\stm32f10x_iwdg.crf --depend .\stm32f10x_iwdg.d)
+I (..\SRC\LIB\inc\stm32f10x_iwdg.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_map.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_conf.h)(0x580261D4)
+I (..\SRC\LIB\inc\stm32f10x_type.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\cortexm3_macro.h)(0x5379B6BC)
+F (..\SRC\LIB\stm32f10x_lib.c)(0x5379B6BE)(-c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I.\SRC -I..\SRC -I..\SRC\LIB -I..\SRC\LIB\inc --c99-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F10x-o .\stm32f10x_lib.o --omf_browse .\stm32f10x_lib.crf --depend .\stm32f10x_lib.d)
+I (..\SRC\LIB\inc\stm32f10x_lib.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_map.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_conf.h)(0x580261D4)
+I (..\SRC\LIB\inc\stm32f10x_type.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\cortexm3_macro.h)(0x5379B6BC)
+I (..\SRC\LIB\inc\stm32f10x_adc.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_bkp.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_can.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_crc.h)(0x5379B6BA)
+I (..\SRC\LIB\inc\stm32f10x_dac.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_dbgmcu.h)(0x5379B6BC)
+I (..\SRC\LIB\inc\stm32f10x_dma.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_exti.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_flash.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_fsmc.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_gpio.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_i2c.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_iwdg.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_nvic.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_pwr.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_rcc.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_rtc.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_sdio.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_spi.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_systick.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_tim.h)(0x5379B6CA)
+I (..\SRC\LIB\inc\stm32f10x_usart.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_wwdg.h)(0x5379B6BC)
+F (..\SRC\LIB\stm32f10x_nvic.c)(0x5379B6C2)(-c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I.\SRC -I..\SRC -I..\SRC\LIB -I..\SRC\LIB\inc --c99-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F10x-o .\stm32f10x_nvic.o --omf_browse .\stm32f10x_nvic.crf --depend .\stm32f10x_nvic.d)
+I (..\SRC\LIB\inc\stm32f10x_nvic.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_map.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_conf.h)(0x580261D4)
+I (..\SRC\LIB\inc\stm32f10x_type.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\cortexm3_macro.h)(0x5379B6BC)
+F (..\SRC\LIB\stm32f10x_pwr.c)(0x5379B6BE)(-c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I.\SRC -I..\SRC -I..\SRC\LIB -I..\SRC\LIB\inc --c99-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F10x-o .\stm32f10x_pwr.o --omf_browse .\stm32f10x_pwr.crf --depend .\stm32f10x_pwr.d)
+I (..\SRC\LIB\inc\stm32f10x_pwr.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_map.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_conf.h)(0x580261D4)
+I (..\SRC\LIB\inc\stm32f10x_type.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\cortexm3_macro.h)(0x5379B6BC)
+I (..\SRC\LIB\inc\stm32f10x_rcc.h)(0x5379B6C0)
+F (..\SRC\LIB\stm32f10x_rcc.c)(0x580261C4)(-c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I.\SRC -I..\SRC -I..\SRC\LIB -I..\SRC\LIB\inc --c99-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F10x-o .\stm32f10x_rcc.o --omf_browse .\stm32f10x_rcc.crf --depend .\stm32f10x_rcc.d)
+I (..\SRC\LIB\inc\stm32f10x_rcc.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_map.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_conf.h)(0x580261D4)
+I (..\SRC\LIB\inc\stm32f10x_type.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\cortexm3_macro.h)(0x5379B6BC)
+F (..\SRC\LIB\stm32f10x_rtc.c)(0x5379B6BE)(-c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I.\SRC -I..\SRC -I..\SRC\LIB -I..\SRC\LIB\inc --c99-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F10x-o .\stm32f10x_rtc.o --omf_browse .\stm32f10x_rtc.crf --depend .\stm32f10x_rtc.d)
+I (..\SRC\LIB\inc\stm32f10x_rtc.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_map.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_conf.h)(0x580261D4)
+I (..\SRC\LIB\inc\stm32f10x_type.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\cortexm3_macro.h)(0x5379B6BC)
+F (..\SRC\LIB\stm32f10x_sdio.c)(0x5379B6C4)(-c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I.\SRC -I..\SRC -I..\SRC\LIB -I..\SRC\LIB\inc --c99-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F10x-o .\stm32f10x_sdio.o --omf_browse .\stm32f10x_sdio.crf --depend .\stm32f10x_sdio.d)
+I (..\SRC\LIB\inc\stm32f10x_sdio.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_map.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_conf.h)(0x580261D4)
+I (..\SRC\LIB\inc\stm32f10x_type.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\cortexm3_macro.h)(0x5379B6BC)
+I (..\SRC\LIB\inc\stm32f10x_rcc.h)(0x5379B6C0)
+F (..\SRC\LIB\stm32f10x_spi.c)(0x5379B6C2)(-c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I.\SRC -I..\SRC -I..\SRC\LIB -I..\SRC\LIB\inc --c99-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F10x-o .\stm32f10x_spi.o --omf_browse .\stm32f10x_spi.crf --depend .\stm32f10x_spi.d)
+I (..\SRC\LIB\inc\stm32f10x_spi.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_map.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_conf.h)(0x580261D4)
+I (..\SRC\LIB\inc\stm32f10x_type.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\cortexm3_macro.h)(0x5379B6BC)
+I (..\SRC\LIB\inc\stm32f10x_rcc.h)(0x5379B6C0)
+F (..\SRC\LIB\stm32f10x_systick.c)(0x5379B6BE)(-c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I.\SRC -I..\SRC -I..\SRC\LIB -I..\SRC\LIB\inc --c99-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F10x-o .\stm32f10x_systick.o --omf_browse .\stm32f10x_systick.crf --depend .\stm32f10x_systick.d)
+I (..\SRC\LIB\inc\stm32f10x_systick.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_map.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_conf.h)(0x580261D4)
+I (..\SRC\LIB\inc\stm32f10x_type.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\cortexm3_macro.h)(0x5379B6BC)
+F (..\SRC\LIB\stm32f10x_tim.c)(0x5379B6D0)(-c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I.\SRC -I..\SRC -I..\SRC\LIB -I..\SRC\LIB\inc --c99-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F10x-o .\stm32f10x_tim.o --omf_browse .\stm32f10x_tim.crf --depend .\stm32f10x_tim.d)
+I (..\SRC\LIB\inc\stm32f10x_tim.h)(0x5379B6CA)
+I (..\SRC\LIB\inc\stm32f10x_map.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_conf.h)(0x580261D4)
+I (..\SRC\LIB\inc\stm32f10x_type.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\cortexm3_macro.h)(0x5379B6BC)
+I (..\SRC\LIB\inc\stm32f10x_rcc.h)(0x5379B6C0)
+F (..\SRC\LIB\stm32f10x_usart.c)(0x5379B6C8)(-c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I.\SRC -I..\SRC -I..\SRC\LIB -I..\SRC\LIB\inc --c99-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F10x-o .\stm32f10x_usart.o --omf_browse .\stm32f10x_usart.crf --depend .\stm32f10x_usart.d)
+I (..\SRC\LIB\inc\stm32f10x_usart.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_map.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_conf.h)(0x580261D4)
+I (..\SRC\LIB\inc\stm32f10x_type.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\cortexm3_macro.h)(0x5379B6BC)
+I (..\SRC\LIB\inc\stm32f10x_rcc.h)(0x5379B6C0)
+F (..\SRC\LIB\stm32f10x_wwdg.c)(0x5379B6BE)(-c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I.\SRC -I..\SRC -I..\SRC\LIB -I..\SRC\LIB\inc --c99-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F10x-o .\stm32f10x_wwdg.o --omf_browse .\stm32f10x_wwdg.crf --depend .\stm32f10x_wwdg.d)
+I (..\SRC\LIB\inc\stm32f10x_wwdg.h)(0x5379B6BC)
+I (..\SRC\LIB\inc\stm32f10x_map.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_conf.h)(0x580261D4)
+I (..\SRC\LIB\inc\stm32f10x_type.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\cortexm3_macro.h)(0x5379B6BC)
+I (..\SRC\LIB\inc\stm32f10x_rcc.h)(0x5379B6C0)
+F (..\SRC\rb_base64m.c)(0x58A27274)(-c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I.\SRC -I..\SRC -I..\SRC\LIB -I..\SRC\LIB\inc --c99-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F10x-o .\rb_base64m.o --omf_browse .\rb_base64m.crf --depend .\rb_base64m.d)
+I (..\SRC\SysType.h)(0x58FFCA76)
+I (..\SRC\LIB\inc\stm32f10x_lib.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_map.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_conf.h)(0x580261D4)
+I (..\SRC\LIB\inc\stm32f10x_type.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\cortexm3_macro.h)(0x5379B6BC)
+I (..\SRC\LIB\inc\stm32f10x_adc.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_bkp.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_can.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_crc.h)(0x5379B6BA)
+I (..\SRC\LIB\inc\stm32f10x_dac.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_dbgmcu.h)(0x5379B6BC)
+I (..\SRC\LIB\inc\stm32f10x_dma.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_exti.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_flash.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_fsmc.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_gpio.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_i2c.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_iwdg.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_nvic.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_pwr.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_rcc.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_rtc.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_sdio.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_spi.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_systick.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_tim.h)(0x5379B6CA)
+I (..\SRC\LIB\inc\stm32f10x_usart.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_wwdg.h)(0x5379B6BC)
+I (..\SRC\stm_GpioBit.h)(0x5803C5EA)
+I (..\SRC\STM32_Reg.h)(0x5379B6BE)
+I (..\SRC\rb_crc16.h)(0x5695381A)
+I (..\SRC\rb_base64m.h)(0x58A276DC)
+F (..\SRC\rb_crc16.c)(0x56C4764A)(-c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I.\SRC -I..\SRC -I..\SRC\LIB -I..\SRC\LIB\inc --c99-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F10x-o .\rb_crc16.o --omf_browse .\rb_crc16.crf --depend .\rb_crc16.d)
+I (..\SRC\SysType.h)(0x58FFCA76)
+I (..\SRC\LIB\inc\stm32f10x_lib.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_map.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_conf.h)(0x580261D4)
+I (..\SRC\LIB\inc\stm32f10x_type.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\cortexm3_macro.h)(0x5379B6BC)
+I (..\SRC\LIB\inc\stm32f10x_adc.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_bkp.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_can.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_crc.h)(0x5379B6BA)
+I (..\SRC\LIB\inc\stm32f10x_dac.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_dbgmcu.h)(0x5379B6BC)
+I (..\SRC\LIB\inc\stm32f10x_dma.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_exti.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_flash.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_fsmc.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_gpio.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_i2c.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_iwdg.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_nvic.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_pwr.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_rcc.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_rtc.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_sdio.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_spi.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_systick.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_tim.h)(0x5379B6CA)
+I (..\SRC\LIB\inc\stm32f10x_usart.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_wwdg.h)(0x5379B6BC)
+I (..\SRC\stm_GpioBit.h)(0x5803C5EA)
+I (..\SRC\STM32_Reg.h)(0x5379B6BE)
+I (..\SRC\rb_crc16.h)(0x5695381A)
+F (..\SRC\core_UID.c)(0x5A106D0B)(-c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I.\SRC -I..\SRC -I..\SRC\LIB -I..\SRC\LIB\inc --c99-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F10x-o .\core_uid.o --omf_browse .\core_uid.crf --depend .\core_uid.d)
+I (..\SRC\SysType.h)(0x58FFCA76)
+I (..\SRC\LIB\inc\stm32f10x_lib.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_map.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_conf.h)(0x580261D4)
+I (..\SRC\LIB\inc\stm32f10x_type.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\cortexm3_macro.h)(0x5379B6BC)
+I (..\SRC\LIB\inc\stm32f10x_adc.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_bkp.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_can.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_crc.h)(0x5379B6BA)
+I (..\SRC\LIB\inc\stm32f10x_dac.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_dbgmcu.h)(0x5379B6BC)
+I (..\SRC\LIB\inc\stm32f10x_dma.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_exti.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_flash.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_fsmc.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_gpio.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_i2c.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_iwdg.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_nvic.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_pwr.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_rcc.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_rtc.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_sdio.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_spi.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_systick.h)(0x5379B6BE)
+I (..\SRC\LIB\inc\stm32f10x_tim.h)(0x5379B6CA)
+I (..\SRC\LIB\inc\stm32f10x_usart.h)(0x5379B6C0)
+I (..\SRC\LIB\inc\stm32f10x_wwdg.h)(0x5379B6BC)
+I (..\SRC\stm_GpioBit.h)(0x5803C5EA)
+I (..\SRC\STM32_Reg.h)(0x5379B6BE)
+I (..\SRC\core_UID.h)(0x5A106BDB)

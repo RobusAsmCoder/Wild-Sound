@@ -1,0 +1,289 @@
+
+;
+;const u16 tableP22[301] = {7844,        7825,   7807,   7788,   7770,   7751,   7732,   7714,   7695,   7677,   7658,
+;7632,   7607,   7581,   7556,   7530,   7505,   7479,   7453,   7428,   7402,   7377,   7351,   7326,   7300,   7274,   7249,   7223,   7198,   7172,   7147,   7121,   7095,   7070,   7044,   7019,   6993,   6967,   6942,   6916,   6891,   6865,   6840,   6814,   6788,   6763,   6737,   6712,   6686,   6661,   6635,
+;6610,   6585,   6560,   6535,   6510,   6485,   6460,   6435,   6411,   6386,   6361,   6336,   6311,   6286,   6261,   6236,   6211,   6186,   6161,   6136,   6111,   6086,   6061,   6036,   6012,   5987,   5962,   5937,   5912,   5887,   5862,   5837,   5812,   5787,   5762,   5737,   5712,   5687,   5662,   5637,   5612,   5588,   5563,   5538,   5513,   5488,   5463,   5438,   5413,   5388,
+;5363,   5338,   5314,   5289,   5264,   5239,   5214,   5190,   5165,   5140,   5115,   5090,   5066,   5041,   5016,   4991,   4966,   4942,   4917,   4892,   4867,   4842,   4818,   4793,   4768,   4743,   4718,   4694,   4669,   4644,   4619,   4594,   4570,   4545,   4520,   4495,   4470,   4446,   4421,   4396,   4371,   4346,   4322,   4297,   4272,   4247,   4222,   4198,   4173,   4148,
+;4121,   4095,   4068,   4041,   4014,   3988,   3961,   3934,   3907,   3881,   3854,   3827,   3800,   3774,   3747,   3720,   3693,   3667,   3640,   3613,   3586,   3560,   3533,   3506,   3480,   3453,   3426,   3399,   3373,   3346,   3319,   3292,   3266,   3239,   3212,   3185,   3159,   3132,   3105,   3078,   3052,   3025,   2998,   2971,   2945,   2918,   2891,   2864,   2838,   2811,
+;2790,   2770,   2749,   2729,   2708,   2688,   2667,   2646,   2626,   2605,   2585,   2564,   2543,   2523,   2502,   2482,   2461,   2441,   2420,   2399,   2379,   2358,   2338,   2317,   2297,   2276,   2255,   2235,   2214,   2194,   2173,   2152,   2132,   2111,   2091,   2070,   2050,   2029,   2008,   1988,   1967,   1947,   1926,   1905,   1885,   1864,   1844,   1823,   1803,   1782,
+;1757,   1732,   1707,   1682,   1657,   1632,   1607,   1582,   1558,   1533,   1508,   1483,   1458,   1433,   1408,   1383,   1358,   1333,   1308,   1283,   1258,   1233,   1208,   1183,   1159,   1134,   1109,   1084,   1059,   1034,   1009,   984,    959,    934,    909,    884,    859,    834,    809,    784,    759,    735,    710,    685,    660,    635,    610,    585,    560,    535};
+;
+;const u16 tableP6[101] = {7844, 7827,   7809,   7792,   7774,   7757,   7740,   7722,   7705,   7687,   7670,
+;7650,   7629,   7609,   7588,   7568,   7547,   7527,   7506,   7486,   7465,
+;7444,   7423,   7402,   7380,   7359,   7338,   7317,   7296,   7275,   7254,   7232,   7211,   7190,   7169,   7148,   7127,   7105,   7084,   7063,   7042,
+;7016,   6990,   6964,   6938,   6913,   6887,   6861,   6835,   6809,   6783,   6757,   6731,   6705,   6679,   6654,   6628,   6602,   6576,   6550,   6524,
+;6501,   6478,   6455,   6432,   6409,   6386,   6363,   6340,   6317,   6294,   6271,   6248,   6225,   6202,   6179,   6156,   6133,   6110,   6087,   6064,
+;6030,   5995,   5961,   5927,   5893,   5858,   5824,   5790,   5755,   5721,
+;5703,   5684,   5666,   5647,   5629,   5610,   5592,   5573,   5555,   5536};
+;
+;const u16 tableP9[121] = {7844, 7827,   7809,   7792,   7774,   7757,   7739,   7722,   7704,   7687,   7669,
+;7646,   7622,   7599,   7575,   7552,   7528,   7505,   7481,   7458,   7434,
+;7412,   7390,   7368,   7346,   7324,   7302,   7280,   7258,   7236,   7215,   7193,   7171,   7149,   7127,   7105,   7083,   7061,   7039,   7017,   6995,
+;6970,   6945,   6920,   6895,   6870,   6844,   6819,   6794,   6769,   6744,   6719,   6694,   6669,   6644,   6619,   6593,   6568,   6543,   6518,   6493,
+;6470,   6447,   6424,   6402,   6379,   6356,   6333,   6310,   6287,   6265,   6242,   6219,   6196,   6173,   6150,   6127,   6105,   6082,   6059,   6036,
+;6004,   5972,   5940,   5908,   5877,   5845,   5813,   5781,   5749,   5717,
+;5696,   5674,   5653,   5631,   5610,   5589,   5567,   5546,   5524,   5503,
+;5479,   5454,   5430,   5405,   5381,   5356,   5332,   5307,   5283,   5258,   5234,   5209,   5185,   5160,   5136,   5111,   5087,   5062,   5038,   5013};
+;
+
+
+
+
+
+        ORG 0
+
+
+;-------------------------------------
+
+        LDI             ;16+(1+1) = 45
+        DEC BC          ;6
+        ADD A,YL        ;8
+        ADC HL,BC       ;15
+
+;-------------------------------------
+
+        LD A,(HL)       ;7   = 105
+        EXX             ;4
+        LD E,A          ;4
+        LD C,A          ;4
+        LD A,(DE)       ;7
+        ADD A,(HL)      ;7
+        LD (HL),A       ;7
+        INC L           ;4
+        LD A,(BC)       ;7
+        ADD A,(HL)      ;7
+        LD (HL),A       ;7
+        INC HL          ;6
+        EXX             ;4
+        ADD IX,BC       ;15
+        ADC HL,DE       ;15
+
+;-------------------------------------
+
+
+        EX (SP),HL      ;19
+        LD A,(DE)
+        ADD A,L
+        LD L,A
+        LD A,(BC)
+        ADD A,H
+        LD H,A
+        PUSH HL
+
+
+;-------------------------------------
+
+        LD A,(HL)       ;7   = 114
+        EXX             ;4
+        LD D,A          ;4
+        LD H,A          ;4
+        POP BC          ;10
+        LD A,(DE)       ;7
+        ADD A,C         ;4
+        LD C,A          ;4
+        LD A,B          ;4
+        ADD A,(HL)      ;7
+        LD B,A          ;4
+        PUSH BC         ;11
+        POP BC          ;10
+        EXX             ;4
+        ADD IX,BC       ;15
+        ADC HL,DE       ;15
+
+
+;-------------------------------------
+
+        LD L,(IX)       ;19 = 138
+        LD A,(DE)       ;7  BUFFER LEFT GET
+        LD H,C          ;4  VOLUME TABLE LEFT
+        ADD A,(HL)      ;7  ADD VOLUME TABLE BY SAMPLE LEFT
+        LD (DE),A       ;7  BUFFER LEFT SAVE
+        INC E           ;4
+        LD A,(DE)       ;7  BUFFER RIGHT GET
+        LD H,B          ;4  VOLUME TABLE RIGHT
+        ADD A,(HL)      ;7  ADD VOLUME TABLE BY SAMPLE RIGHT
+        LD (DE),A       ;7  BUFFER RIGHT SAVE
+        INC DE          ;6
+        EXX             ;4
+        ADD HL,BC       ;11
+        LD A,XL         ;8
+        ADC A,E         ;4
+        LD XL,A         ;8
+        LD A,XH         ;8
+        ADC A,D         ;4
+        LD XH,A         ;8
+        EXX             ;4
+
+;-------------------------------------
+
+        POP HL          ;10 = 114
+        LD A,(DE)       ;7  BUFFER LEFT GET
+        LD H,C          ;4  VOLUME TABLE LEFT
+        ADD A,(HL)      ;7  ADD VOLUME TABLE BY SAMPLE LEFT
+        LD (DE),A       ;7  BUFFER LEFT SAVE
+        INC E           ;4
+        LD A,(DE)       ;7  BUFFER RIGHT GET
+        LD H,B          ;4  VOLUME TABLE RIGHT
+        ADD A,(HL)      ;7  ADD VOLUME TABLE BY SAMPLE RIGHT
+        LD (DE),A       ;7  BUFFER RIGHT SAVE
+        INC DE          ;6
+        EXX             ;4
+        ADD IX,BC       ;15
+        ADC HL,DE       ;15
+        LD SP,HL        ;6
+        EXX             ;4
+
+;-------------------------------------
+
+        POP HL          ;10 = 135
+        LD A,(0)        ;13 BUFFER LEFT GET
+        LD H,0          ;7  VOLUME TABLE LEFT
+        ADD A,(HL)      ;7  ADD VOLUME TABLE BY SAMPLE LEFT
+        LD (0),A        ;13 BUFFER LEFT SAVE
+        LD A,(1)        ;13 BUFFER RIGHT GET
+        LD H,0          ;7  VOLUME TABLE RIGHT
+        ADD A,(HL)      ;7  ADD VOLUME TABLE BY SAMPLE RIGHT
+        LD (1),A        ;13 BUFFER RIGHT SAVE
+        EXA             ;4
+        EX DE,HL        ;4
+        ADD A,YL        ;8
+        ADC HL,BC       ;15
+        LD SP,HL        ;6
+        EX DE,HL        ;4
+        EXA             ;4
+
+
+;-------------------------------------
+
+        LD E,(HL)       ;7   = 141
+        LD D,0          ;7
+        LD A,(DE)       ;7
+        ADD A,(IX)      ;19
+        LD (IX),A       ;19
+        LD D,1          ;7
+        LD A,(DE)       ;7
+        ADD A,(IX)      ;19
+        LD (IX),A       ;19
+        ADD IY,BC       ;15
+        ADC HL,DE       ;15
+
+;-------------------------------------
+;-------------------------------------
+;-------------------------------------
+;-------------------------------------
+
+
+        EXA             ;4
+        ADD A,YL        ;8
+        ADC IX,SP       ;15
+        LD SP,IX        ;10
+        EXA             ;4
+
+
+
+        POP HL          ;10 =
+        LD A,(0)        ;13 BUFFER LEFT GET
+        LD H,C          ;4  VOLUME TABLE LEFT
+        ADD A,(HL)      ;7  ADD VOLUME TABLE BY SAMPLE LEFT
+        LD (0),A        ;13 BUFFER LEFT SAVE
+        LD A,(1)        ;13 BUFFER RIGHT GET
+        LD H,B          ;4  VOLUME TABLE RIGHT
+        ADD A,(HL)      ;7  ADD VOLUME TABLE BY SAMPLE RIGHT
+        LD (1),A        ;13 BUFFER RIGHT SAVE
+
+
+        EXA             ;4
+        ADD A,C         ;4
+        EX DE,HL        ;4
+        ADC HL,BC       ;15
+        LD SP,HL        ;6
+        EX DE,HL        ;4
+        EXA             ;4
+
+        ADD IX,DE
+        ADC HL,BC
+        LD SP,HL
+        EXA             ;4
+
+        EXA             ;4
+        EX DE,HL        ;4
+        ADD A,YL        ;8
+        ADC HL,SP       ;15
+        LD SP,IX        ;10
+        EX DE,HL        ;4
+        EXA             ;4
+
+
+
+
+
+
+        LD L,(IX)       ;19 = 110
+        LD A,(DE)       ;7  BUFFER LEFT GET
+        LD H,C          ;4  VOLUME TABLE LEFT
+        ADD A,(HL)      ;7  ADD VOLUME TABLE BY SAMPLE LEFT
+        LD (DE),A       ;7  BUFFER LEFT SAVE
+        INC E           ;4
+        LD A,(DE)       ;7  BUFFER RIGHT GET
+        LD H,B          ;4  VOLUME TABLE RIGHT
+        ADD A,(HL)      ;7  ADD VOLUME TABLE BY SAMPLE RIGHT
+        LD (DE),A       ;7  BUFFER RIGHT SAVE
+        INC DE          ;6
+        EXA             ;4
+        ADD A,YL        ;8
+        ADC IX,SP       ;15
+        EXA             ;4
+
+
+        EXA
+        ADD A,YL        ;8
+        ADC IX,SP       ;15
+        EXA
+        EXX
+        ADD HL,DE       ;11
+        ADC IX,BC       ;15
+        EXX
+
+
+        EXA
+        LD E,(HL)       ;SAMPLE BYTE
+        EX DE,HL
+        LD A,(0)        ;BUFFER LEFT GET
+        LD H,C          ;VOLUME TABLE LEFT
+        ADD A,(HL)      ;ADD VOLUME TABLE BY SAMPLE LEFT
+        LD (0),A        ;BUFFER LEFT SAVE
+        LD A,(1)        ;BUFFER RIGHT GET
+        LD H,B          ;VOLUME TABLE RIGHT
+        ADD A,(HL)      ;ADD VOLUME TABLE BY SAMPLE RIGHT
+        LD (1),A        ;BUFFER RIGHT SAVE
+        EX DE,HL
+        EXA
+        ADD A,C         ;SAMPLE STEP LOW
+        ADC HL,SP       ;SAMPLE STEP HIGH
+
+        ADD IX,BC
+        ADC HL,SP       ;SAMPLE STEP HIGH
+
+
+;START   EQU $
+; START1 : START2 EQU $
+;
+;
+;6       EQU 66
+;
+;TEST    EQU 6*2
+;        EQU 6=6
+
+
+        LD (1+(6-7)),A
+
+        LD (IX+7-10),A
+        LD (IX-3),A
+
+
+
+
+        SaveBIN "%$ASAM.Compile.FileName%.bin",0,$
+        SaveLabels "%$ASAM.Compile.FileName%.txt"
+
+

@@ -1,0 +1,14 @@
+-mjwx
+-i obj/out.hex
+-b _CODE = 0x0200
+-b _DATA = 0x8000
+-b_HEADER=0x6000
+-b_HOME=0x6010
+-b_CODE=0x6200
+-b_DATA=0x5B00
+-k D:\KEIL.PRJ\STM_AYX32_TSL\SDCC\bin\..\lib\z80
+-l z80
+obj/out.rel
+obj/crt0.rel
+
+-e

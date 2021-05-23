@@ -1,0 +1,112 @@
+
+        EQU $ASAM.PASS.ERROR=2
+
+        Include "DOS\doslzsa.inc"
+        Include "loader.inc"
+;        Include "pack.inc"
+        Include "speccy.az8"
+
+BOOT.PTR EQU DOS.STACK
+
+         CreateImage "BOOT.trd"
+
+BOOT_START EQU 32768
+
+          ORG 23867
+;          ORG 0
+BasStart  DB 0,1
+          DW BasVar-$-2
+
+          DB 0F9H,0C0H,'(',0B0H,'A$+A)'
+          DB ':'
+          DB 0F9H,0C0H,'(',0B0H,'A$+B)'
+          DB 00DH
+
+
+
+BasVar    EQU $
+
+          .MAC_BAS_STRING û
+           DW @..-$-2
+           DB @.0
+          ..
+
+          DB 'A'
+          MAC_BAS_STRING 0BEH,'23635+256*',0BEH,'23636'
+
+          DB 'A'
+          DW @Size
+
+@Start:   LD HL,@StartX
+          EI
+          HALT
+          LD A,7
+          OUT (254),A
+          LD L,A
+          RLCA
+          RLCA
+          RLCA
+          OR L
+          LD HL,22528
+          LD DE,22529
+          LD BC,767
+          LD (HL),A
+          LDIR
+          Exit.Basic.48
+@StartX:  DI
+          LD HL,(23635)
+          LD DE,@EXEC_OFS
+          ADD HL,DE
+          LD DE,BOOT_START
+          LD BC,@EXEC_S
+          LDIR
+          JP BOOT_START
+@EXEC:    Phase BOOT_START
+;HL = (LOA.SAV_TRK)       TRACK POS FOR LOADER
+; E = (LOA.SAV_DRV)     DRIVE NUMBER
+; D = (LOA.PTR_VER)   OLD SCRIPT ZUAF EXECUTER
+           LD HL,(23796)         ;GET TRK/SEC POSITION
+           LD DE,(23830)         ;GET DRIVE NUMBER
+           LD D,255
+           IncBIN "CODE\loaexe.cod"
+          UnPhase
+@EXEC_S   EQU $-@EXEC
+
+@START_OFS  EQU @Start-BasStart
+@STARTXOFS  EQU @StartX-BasStart
+@EXEC_OFS   EQU @EXEC-BasStart
+
+@Size     EQU $-@Start
+
+          DB 'a',0,0
+          DW @START_OFS
+          DB 0
+          DB 'b',0,0
+          DW @STARTXOFS
+          DB 0
+BasVarSize EQU $-BasVar
+          DB 080H,0AAH
+          DW 1                          ;Basic Auto-Start Line
+BasEnd    EQU $
+BasSize   EQU BasEnd-BasStart
+
+_END   EQU $
+       .64
+        DB "XM PLAYER "
+       ..
+       ORG _END
+
+          SaveTRD "SET START","SET SIZE",BasSize-4,BasSize-4-BasVarSize
+          SaveTRD "BOOT.trd","boot.B",BasStart,BasSize
+
+
+
+        .AddTrdBLK û
+         ORG 0
+         IncBIN @.0
+         SaveAddTRD "BOOT.trd","boot.B",0,$
+        ..
+
+        AddTrdBLK "CODE\loader.cod"
+
+        SaveLabels "%$ASAM.Compile.FileName%.txt"

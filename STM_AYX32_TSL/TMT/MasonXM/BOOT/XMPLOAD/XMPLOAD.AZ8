@@ -1,0 +1,512 @@
+        EQU $ASAM.PASS.ERROR=2
+
+
+
+        .AY_R û
+         LD BC,65533
+         LD A,@.0
+         OUT (C),A
+        ..
+        .AY_D û
+         LD BC,49149
+         LD A,@.0
+         OUT (C),A
+        ..
+
+        .AY_WR (),û
+         LD BC,65533
+         LD A,@.0
+         OUT (C),A
+         LD B,191
+         LD A,@.1
+         OUT (C),A
+        ..
+
+        .AY_RD û
+         LD BC,65533
+         IN @.0,(C)
+        ..
+
+
+        ORG 5C00H
+START   EQU $
+        NOP
+
+
+
+;A=REG
+AYwREG: PUSH BC
+        LD BC,65533
+        OUT (C),A
+        POP BC
+        RET
+;A=DATA
+AYwDTA: PUSH BC
+        LD BC,49149
+        OUT (C),A
+        POP BC
+        RET
+;ED = DATA
+AYwDTAW:PUSH BC
+        LD BC,49149
+        OUT (C),E
+        OUT (C),D
+        POP BC
+        RET
+;AED = DATA
+AYwDTAT:PUSH BC
+        LD BC,49149
+        OUT (C),A
+        OUT (C),E
+        OUT (C),D
+        POP BC
+        RET
+;OUT:A
+AYrDTA: PUSH BC
+        LD BC,65533
+        IN A,(C)
+        POP BC
+        RET
+;HL=ADDR FOR DATA
+; B=SIZE
+AYrDTABUF:
+        PUSH BC DE
+        LD D,B
+        LD BC,65533
+AYRDBx1 IN E,(C)
+        LD (HL),E
+        INC HL
+        DEC D
+        JR NZ,AYRDBx1
+        POP DE BC
+        RET
+;HL=ADDR FOR DATA
+; B=SIZE
+AYwDTABUF:
+        PUSH BC DE
+        LD D,B
+        LD BC,49149
+AYWDBx1 LD E,(HL)
+        OUT (C),E
+        INC HL
+        DEC D
+        JR NZ,AYWDBx1
+        POP DE BC
+        RET
+
+; A=REG
+; E=DATA
+AYwREDB:PUSH BC
+        LD BC,65533
+        OUT (C),A
+        LD B,191
+        OUT (C),E
+        POP BC
+        RET
+; A=REG
+;DE=DATA
+;AYwREDW:PUSH BC
+;        LD BC,65533
+;        OUT (C),A
+;        LD B,191
+;        OUT (C),E
+;        OUT (C),D
+;        POP BC
+;        RET
+; A=CMD
+WS_StreamCMD:
+        PUSH DE
+        PUSH AF
+        LD A,0F1H
+        CALL AYwREG
+        POP DE
+        LD E,D
+        LD D,0
+        CALL AYwDTAW
+        POP DE
+        RET
+
+;HL=ADDR
+; B=SIZE (0-REAL ZERRO NO DATA)
+WS_StreamDTA:
+
+        LD E,B
+        LD A,0F2H
+        CALL AYwREDB
+
+        INC B
+        DEC B
+        RET Z
+        CALL AYwDTABUF
+        RET
+
+WS_StreamDTA_ZERRO_WaitBusy:
+        PUSH BC
+        LD B,0
+        CALL WS_StreamDTA
+        POP BC
+        CALL WS_StreamStatusWaitBusy
+        RET
+
+
+
+;HL=ADDR
+; B=SIZE
+WS_StreamCRC:
+        LD DE,0000H
+WSCRCx1 LD A,(HL)
+        INC HL
+        BIT 0,E
+        JR NZ,WSCRC01
+WSCRC00:ADD A,E
+        BIT 1,E
+        JR NZ,WSCRC10
+        XOR D
+        JR WSCRCxE
+WSCRC10 LD C,A
+        LD A,D
+        SUB C
+        JR WSCRCxE
+WSCRC01:SUB E
+        BIT 1,E
+        JR NZ,WSCRC11
+        XOR D
+        JR WSCRCxE
+WSCRC11 ADD A,D
+WSCRCxE LD D,A
+        INC E
+        DJNZ WSCRCx1
+        RET
+
+
+
+
+;OUT:CF=1 - BUSY
+;    ZF=1 - CRCOK (STATUS RELEVANT)
+WS_StreamStatusRD:
+        PUSH DE HL BC
+        LD A,0F3H
+        CALL AYwREG
+        LD B,1
+        DJNZ $
+        LD B,32
+        LD HL,WSSTDATA
+        PUSH HL
+        CALL AYrDTABUF
+        DEC HL
+        DEC HL
+        LD A,(HL)
+        XOR 03DH
+        LD C,A
+        DEC HL
+        LD A,(HL)
+        XOR 0FAH
+        OR C
+        POP HL
+        JR NZ,WSSSRx1
+        DEC B
+        CALL WS_StreamCRC
+        XOR (HL)
+WSSSRx1 POP BC HL DE
+        RET NZ
+        LD A,(WSSTDATA+1)
+        RLCA
+        RET
+
+WS_CounterSet10000:
+        PUSH HL
+        LD HL,10000
+        CALL WS_CounterSet
+        POP HL
+        RET
+
+;A=COLOR
+WS_Border:
+        LD (WSBORx1+1),A
+WS_BorderRestore:
+        PUSH AF
+WSBORx1:LD A,0
+        OUT (254),A
+        POP AF
+        RET
+
+
+;HL=DATA
+WS_CounterSet:
+        LD (WSCSTx2+1),HL
+        RET
+
+;OUT:ZF=1 - ZERRO ,,, CALL THIS JP Z,COUNTER_END
+WS_CounterStep:
+        PUSH HL
+        LD (WSCSTx1+1),A
+WSCSTx2 LD HL,0
+        LD A,H
+        OR L
+        JR Z,WSCSTx1
+        DEC HL
+        LD (WSCSTx2+1),HL
+WSCSTx1 LD A,0
+        POP HL
+        RET
+
+
+
+
+WS_StreamStatusWait:
+WSTSTx1 CALL WS_StreamStatusRD
+        JP Z,WS_BorderRestore;RET Z
+WSTSTx5 CALL WS_CounterSet10000
+WSTSTx2 CALL WS_StreamStatusRD
+        JR Z,WSTSTx1
+        CALL WS_CounterStep
+        JR NZ,WSTSTx2
+WSTSTx6 LD A,1
+        XOR 1
+        LD (WSTSTx6+1),A
+        LD A,2
+        OUT (254),A
+        CALL Z,WS_BorderRestore
+        JR WSTSTx5
+
+;WSTSTx2:PUSH BC
+;        LD BC,100
+;WSTSTx3 DEC BC
+;        LD A,B
+;        OR C
+;        JR NZ,WSTSTx3
+;        POP BC
+WS_StreamStatusWaitBusy:
+WSTSTx4 CALL WS_StreamStatusWait
+        JR C,WSTSTx4
+        RET
+
+
+
+;HL=ADDR
+;DE=SIZE
+WS_StreamDTA_SendBLOCK:
+        XOR A
+; A=0 - Send Zerro
+WS_StreamDTA_SendBLOCKP:
+        PUSH BC AF
+WSDSBx3 CALL WS_StreamStatusWaitBusy
+WSDSBx1 LD A,(WSSTDATA+10)      ;FREE SIZE IN FIFO
+        ;OR A
+        ;JR Z,WSDSBx3
+        PUSH DE
+        INC D
+        DEC D
+        JR NZ,WSDSBx2
+        CP E
+        JR C,WSDSBx2
+        LD A,E
+WSDSBx2 LD B,A
+        PUSH BC
+        CALL WS_StreamDTA
+        CALL WS_StreamStatusWaitBusy
+        POP BC DE
+        LD C,B
+        LD B,0
+        EX DE,HL
+        AND A
+        SBC HL,BC
+        EX DE,HL
+        JR NZ,WSDSBx1
+        POP AF
+        OR A
+        CALL Z,WS_StreamDTA_ZERRO_WaitBusy
+        POP BC
+        RET
+
+
+
+;HL=ADDR
+;BC=SIZE
+UpLoadCMD_SendParam:
+        CALL WS_StreamCMD
+UPLC_AD LD HL,0
+UPLC_SI LD DE,0
+        CALL AYwDTAW       ;SEND BLOCK SIZE
+        PUSH DE
+        LD DE,0
+        CALL AYwDTAW
+        POP DE
+        RET
+
+UpLoadCMD:
+        CALL UpLoadCMD_SendParam
+        CALL WS_StreamDTA_SendBLOCK
+        RET
+
+;HL=ADDR
+;BC=SIZE
+UpLoadSaveStartParam:
+        LD (UPLC_AD+1),HL
+        LD (UPLC_SI+1),BC
+        RET
+
+
+ResetWildSoundPlayer:
+        LD A,000H       ;cays_CMD_NOP
+        CALL WS_StreamCMD
+        CALL WS_StreamDTA_ZERRO_WaitBusy
+
+        LD A,001H       ;cays_CMD_CLEAR
+        CALL WS_StreamCMD
+        CALL WS_StreamDTA_ZERRO_WaitBusy
+
+        LD A,002H       ;cays_CMD_ERASE
+        CALL WS_StreamCMD
+        CALL WS_StreamDTA_ZERRO_WaitBusy
+        RET
+
+UPDDSIZE  DD 0
+
+;BC=SUB SIZE
+UpDDSUB:PUSH HL BC
+        LD HL,(UPDDSIZE+0)
+        SBC HL,BC
+        LD (UPDDSIZE+0),HL
+        LD BC,0
+        LD HL,(UPDDSIZE+2)
+        SBC HL,BC
+        LD (UPDDSIZE+2),HL
+        POP BC HL
+        RET
+
+UpDDZER:PUSH HL
+        LD (UPDZEx1+1),A
+        LD HL,(UPDDSIZE+0)
+        LD A,L
+        OR H
+        LD HL,(UPDDSIZE+2)
+        OR L
+        OR H
+        POP HL
+UPDZEx1 LD A,0
+        RET
+
+
+UpLoadBlkSTART:
+
+        LD HL,(UPLC_AD+1)
+        LD E,(HL)
+        INC HL
+        LD D,(HL)
+        INC HL
+        LD C,(HL)
+        INC HL
+        LD B,(HL)
+        INC HL
+        LD (UPLC_AD+1),HL
+        LD HL,(UPLC_SI+1)
+        DEC HL
+        DEC HL
+        DEC HL
+        DEC HL
+        LD (UPLC_SI+1),HL
+        LD (UPDDSIZE+0),DE
+        LD (UPDDSIZE+2),BC
+        PUSH BC DE
+        CALL ResetWildSoundPlayer
+        LD A,010H       ;cays_CMD_XMAST
+        CALL WS_StreamCMD
+        POP DE
+        CALL AYwDTAW       ;SEND BLOCK SIZE
+        POP DE
+        CALL AYwDTAW
+        RET
+
+TRKBLK  DB 0
+
+UpLoadAY_TRKN:
+        DI
+        CALL UpLoadSaveStartParam
+
+        LD A,(TRKBLK)
+        OR A
+        CALL Z,UpLoadBlkSTART
+
+        ;HL=ADDR
+        ;DE=SIZE
+        LD HL,(UPLC_AD+1)
+        LD DE,(UPLC_SI+1)
+        LD A,1
+        CALL WS_StreamDTA_SendBLOCKP
+
+        LD BC,(UPLC_SI+1)
+        CALL UpDDSUB
+        CALL UpDDZER
+
+        CALL Z,WS_StreamDTA_ZERRO_WaitBusy
+
+        LD HL,TRKBLK
+        INC (HL)
+        RET
+
+
+;HL=LOAD ADDR FROM LOADER
+;BC=LOAD SIZE FROM LOADER
+UpLoadAY_TRK:
+        DI
+        CALL UpLoadSaveStartParam
+        LD A,6
+        CALL WS_Border
+
+        CALL ResetWildSoundPlayer
+
+        LD A,010H       ;cays_CMD_XMAST
+        CALL UpLoadCMD
+        RET
+
+UpLoadAY_INSHDR:
+        DI
+        CALL UpLoadSaveStartParam
+        LD A,5
+        CALL WS_Border
+
+        LD A,020H       ;cays_CMD_XMBST
+        CALL UpLoadCMD
+        RET
+
+UpLoadAY_INS:
+        DI
+;        PUSHA
+;        EXX
+        CALL UpLoadSaveStartParam
+        LD A,4
+        CALL WS_Border
+
+        LD A,021H       ;cays_CMD_XMBDO
+        CALL UpLoadCMD
+;        POPA
+        RET
+
+
+UpPlayer:
+        DI
+        LD A,0
+        CALL WS_Border
+
+        LD A,030H       ;cays_CMD_DIGPLAY
+        CALL WS_StreamCMD
+        CALL WS_StreamDTA_ZERRO_WaitBusy
+
+HHH     AND 7
+        OUT (254),A
+        INC A
+        JR HHH
+
+
+SIZE    EQU $-START
+
+
+WSSTDATA DS 32
+;        DS 512
+        ALIGN 256
+LOAD_DATA     EQU $;6600H
+
+
+        SaveBIN "%$ASAM.Compile.FileName%.bin",START,SIZE
+        SaveLabels "%$ASAM.Compile.FileName%.txt"

@@ -1,0 +1,402 @@
+
+; Compile this only in FAST memory region
+SlowREGION      EQU 29000
+
+
+;DETECT MEMORY
+;OUT:A=48/128
+DetectM:LD HL,49152
+        LD BC,32765
+        LD DE,16+17*256
+        OUT (C),E
+        LD (HL),128
+        OUT (C),D
+        LD (HL),48
+        OUT (C),E
+        LD A,(HL)
+        RET
+
+;DETECT AY
+;OUT:A=0,1,2 - NUMBER OF AY !!!
+DetectB:LD A,254
+        CALL AY_REG
+        CALL AY_ShutUp
+        LD DE,0200H
+        CALL AY_WR
+        LD A,255
+        CALL AY_REG
+        CALL AY_ShutUp
+        LD DE,0100H
+        CALL AY_WR
+
+        CALL AY_REG
+        XOR A
+        CALL AY_RD
+        LD C,A
+        LD A,254
+        CALL AY_REG
+        XOR A
+        CALL AY_RD
+        LD C,A
+        CP 3
+        JR C,CHAYxE
+        XOR A
+CHAYxE  RET
+DetectA:;CALL ReadWildSoundInfo
+        ;LD A,128+2
+        ;RET Z
+        ;JR DetectB
+        CALL DetectB
+        OR A
+        RET Z
+        PUSH AF
+        CALL ReadWildSoundInfo
+        POP BC
+        LD A,B
+        RET NZ
+        OR 128
+        RET
+
+;        .AY_R û
+;         LD A,@.0
+;         CALL AY_REG
+;        ..
+
+;        .AY_D û
+;         LD A,@.0
+;         CALL AY_DAT
+;        ..
+
+ReadWildSoundInfo:
+
+        LD A,0
+        CALL WildSND_Unlock
+        RET NZ
+        LD HL,WILD_INFO ;INFST00+3
+        CALL WLD_READ_STR
+        XOR A
+        RET
+
+WILD_INFO   DS 32,' '
+
+; IN:HL=ADDR
+WLD_READ_STR:
+        LD B,32
+WLRSTx1 CALL AY_DAR
+        LD (HL),A
+        INC HL
+        OR A
+        RET Z
+        DJNZ WLRSTx1
+        RET
+
+; IN: A=WILD CMD
+WildSND_Unlock:
+
+        LD HL,LOCKSTRING
+        CALL SENDSTR
+        CP 0DFH
+;        RET Z
+;        LD A,2
+;        OUT (254),A
+        RET
+        ;JP LOOP
+
+SENDSTR:PUSH AF
+        LD A,0F0H
+        CALL AY_REG
+SESTx1  LD A,(HL)
+        OR A
+        JR Z,SESTx2
+        INC HL
+        CALL AY_DAT;AY_D A
+        JR SESTx1
+SESTx2  POP AF
+        CALL AY_DAT;AY_D A
+        XOR A
+        CALL AY_DAT;AY_D A
+        CALL AY_DAR
+        RET
+
+LOCKSTRING      DB "Wild Sound Enable "
+                DB 0 ;LOCKSTRING_SIZE EQU $-LOCKSTRING
+
+
+; IN:A=REG
+AY_REG: PUSH BC
+        LD BC,65533
+        OUT (C),A
+        POP BC
+        RET
+
+; IN:A=DAT
+AY_DAT: PUSH BC
+        LD BC,49149
+        OUT (C),A
+        POP BC
+        RET
+;OUT:A=DAT
+AY_DAR: PUSH BC
+        LD BC,65533
+        IN A,(C)
+        POP BC
+        RET
+
+; IN: E=REG
+;     D=DATA
+AY_WR:  PUSH BC
+        LD BC,65533
+        OUT (C),E
+        LD BC,49149
+        OUT (C),D
+        POP BC
+        RET
+; IN: A=REG
+;OUT: A=DATA
+AY_RD:  PUSH BC
+        LD BC,65533
+        OUT (C),A
+        IN A,(C)
+        POP BC
+        RET
+
+AY_ShutUp:
+        LD DE,16
+AYSU    DEC E
+        CALL AY_WR
+        JR NZ,AYSU
+        RET
+
+
+
+;DETECT RANDOM
+;OUT:A=RNDx8
+;    C=RNDx4
+;    B=RNDx2
+DetectR:LD A,R
+        LD C,A
+        AND 1
+        LD B,A;LD (LOA.PTR_RNDx2),A
+        LD A,C
+        RRCA
+        AND 3
+        LD C,A;LD (LOA.PTR_RNDx4),A
+        LD A,C
+        RRCA
+        RRCA
+        RRCA
+        AND 7
+        ;LD (LOA.PTR_RNDx8),A
+        RET
+
+
+RAMPage0        EQU        10AFH                ; #0000-#3FFF
+RAMPage1        EQU        11AFH                ; #4000-#7FFF
+RAMPage2        EQU        12AFH                ; #8000-#BFFF
+RAMPage3        EQU        13AFH                ; #‘000-#FFFF
+;DETECT TS-CONFIG
+;OUT:A=128 IF TS CONFIG
+DetectT:PUSH HL DE BC
+;CHECK FOR TS-LAB
+        LD BC,RAMPage3
+        LD A,5
+        OUT (C),A
+        LD HL,23296;22527
+        LD A,(HL)
+        PUSH AF
+        LD D,H
+        LD E,L
+        SET 7,D
+        LD (HL),L
+        LD A,(DE)
+        CP L
+        JR NZ,DETSx1
+        INC (HL)
+        LD A,(DE)
+        DEC A
+        XOR L;CP L
+        JR NZ,DETSx1
+        ;LD HL,LOA.PTR_VER
+        ;SET 7,(HL)
+;        LD L,128
+        LD D,A
+DETSx1  POP AF
+        LD (HL),A
+        XOR A
+        OUT (C),A
+        LD A,D
+        OR A
+        LD A,128
+        JR Z,DETSx2
+        XOR A
+DETSx2  POP BC DE HL
+        RET
+
+;A=0 - Uncnown Model
+;A=1 - Pentagon
+;A=2 - Spectrum 128
+;A=3 - Scorpion
+;A=4 - Spectrum Lvov
+;A=5 - TURBO MODE
+;OUT:A
+DetectZ:
+;        LD HL,(33023)
+;        PUSH HL
+        LD HL,INT
+        LD (33023),HL
+        LD A,128
+        LD I,A
+        IM 2
+
+        LD HL,SlowCOD
+        LD DE,SlowREGION
+        LD BC,SlowCODS
+        LDIR
+
+        CALL IntDetectSlow
+        PUSH HL
+        CALL IntDetectFast
+        POP DE
+        DEC DE
+        DEC DE
+        DEC DE
+        DEC DE
+        PUSH HL
+        SBC HL,DE
+        LD A,L
+        AND 11111000B
+        OR H
+        LD C,A
+        POP HL
+
+;        LD (20480),HL
+
+;        POP HL
+;        LD (33023),HL
+        DI
+        PUSH AF
+        IM 1
+        LD A,63
+        LD I,A
+        LD IY,23610
+        POP AF
+
+TA_SCORP   EQU 114FH
+TA_PENT    EQU 117FH
+TA_48      EQU 110FH
+;TA_T_PENT  EQU 117FH*2
+TA_TURBOHI EQU 011H+8
+
+        PUSH HL
+        LD DE,0-(TA_SCORP-4)
+        ADD HL,DE
+        LD A,L
+        AND 11111000B
+        OR H
+        POP HL
+        JR Z,STx1
+
+        PUSH HL
+        LD DE,0-(TA_PENT-4)
+        ADD HL,DE
+        LD A,L
+        AND 11111000B
+        OR H
+        OR C
+        POP HL
+        JR Z,STxPENT
+
+;        PUSH HL
+;        LD DE,0-(TA_T_PENT-4)
+;        ADD HL,DE
+;        LD A,L
+;        AND 11111000B
+;        OR H
+;        OR C
+;        POP HL
+;        JR Z,STxTPENT
+
+        PUSH HL
+        LD DE,0-(TA_48-4)
+        ADD HL,DE
+        LD A,L
+        AND 11111000B
+        OR H
+        POP HL
+        JR Z,STx3
+
+        LD A,H
+        CP TA_TURBOHI
+        JR C,STx4
+        LD A,5
+        RET
+
+STx4    XOR A
+        RET
+
+
+STxPENT LD A,1
+        RET
+;STxTPENT LD A,1+4
+;        RET
+
+STx1    OR C
+        JR Z,STxSCO
+
+STx128  LD A,2
+        RET
+
+
+STxSCO  LD A,3
+        RET
+
+
+STx3    OR C
+        JR Z,STx4
+
+;Spectrum 48/LVOV
+STx48   LD A,4
+        RET
+
+
+SlowCOD:Phase SlowREGION
+IntDetectSlow:
+        EI
+        XOR A
+        LD HL,4
+        HALT            ;4
+        LD (INT_Sx1),A  ;13
+InDEx2  INC HL          ;6
+        JP InDEx2       ;10
+        UnPhase
+SlowCODS EQU $-SlowCOD
+IntDetectFast:
+        EI
+        XOR A
+        LD HL,4
+        HALT            ;4
+        LD (INT_Sx1),A  ;13
+InDEx1  INC HL          ;6
+        JP InDEx1       ;10
+
+
+INT:    DS 10           ;4*10
+        EI              ;4
+INT_Sx1 RET             ;10
+        POP DE
+        DI
+        LD A,201
+        LD (INT_Sx1),A
+        RET
+
+;INTTURBO:
+;
+;        PUSHA
+;
+;        LD A,6
+;        OUT (254),A
+;
+;        POPA
+;        RET
+
+

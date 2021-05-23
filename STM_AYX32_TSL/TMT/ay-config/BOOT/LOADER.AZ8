@@ -1,0 +1,904 @@
+
+
+        EQU $ASAM.PASS.ERROR=3
+
+        Include "asam_l.az8"
+        Include "DOS\doslzsa.inc"
+;        Include "main.inc"
+        Include "loados.inc"
+        Include "speccy.az8"
+
+
+LOA.START       EQU 35000
+
+        ORG LOA.START
+
+LOA.EXEC   EQU LOA.START+DOS_LOA_SIZE;+32
+        DI
+        LD HL,DOS_LZSA
+        LD DE,LZSA.START
+        LD BC,LZSA.SIZE
+        LDIR
+        LD HL,LOA.END-1
+        LD DE,LOA.EXEC                    ;To
+        PUSH DE
+        MAC_LZSA_PREPARE_FROM_END_MOVE
+        JP DEPACKLZSA
+DOS_LZSA IncBIN "DOS\lzsa.bin"
+DOS_LOA_SIZE EQU $-LOA.START
+__START EQU $
+        ORG LOA.EXEC
+_START  EQU $
+        LD (OLD_SP+1),SP
+        LD A,(LOA.PTR_ZUAF)
+        LD (ZUAF1+1),A
+
+
+        LD SP,$
+
+        LD HL,LODPICEND-1
+        LD DE,20480                    ;To
+        CALL DEPACKX
+
+
+
+        LD A,7+7*8
+        LD (23624),A    ;BORDER+PAPER COLOR FOR SCORPION FLICKING
+
+;CHAECK SLOW REGION MEMORY
+        CALL DetectM
+        LD (LOA.PTR_MEM),A
+
+;        LD SP,LOA.START
+DET_BP  CALL DetectZ
+        LD (LOA.PTR_VER),A
+;A=0 - Uncnown Model
+;A=1 - Pentagon
+;A=2 - Spectrum 128
+;A=3 - Scorpion
+;A=4 - Spectrum Lvov
+;A=5 - TURBO MODE
+
+
+
+
+        LD A,00000100B
+        LD IX,0000H
+        LD BC,1021H
+        LD HL,CRC_TBL
+        CALL CRC_GEN
+
+;        LD A,00000101B
+;        LD IX,0000H
+;        LD BC,8005H
+;        LD HL,CRC_TBL
+;        CALL CRC_GEN
+
+;        LD A,00000010B
+;        LD IX,0000H
+;        LD BC,005EH
+;        LD HL,CRC_TBL
+;        CALL CRC_GEN
+
+        CALL DetectR
+        LD (LOA.PTR_RNDx8),A
+        LD A,C
+        LD (LOA.PTR_RNDx4),A
+        LD A,B
+        LD (LOA.PTR_RNDx2),A
+
+
+
+        CALL DetectT
+        LD HL,LOA.PTR_VER
+        OR (HL)
+        LD (HL),A
+
+
+
+;CHECK AY MODE
+;        LD BC,65533
+
+;        XOR A
+;        LD (LOA.AY_MODE),A
+
+        CALL DetectA
+        LD (LOA.AY_MODE),A
+
+
+;CLEAR KEY MODE
+        XOR A
+        LD (LOA.KEY_MODE),A
+
+;CONTINUE LOADER
+        LD A,128
+        LD I,A
+        IM 2
+
+        LD A,(22528)
+        AND 7
+        LD C,A
+        EXA
+
+        LD HL,INTHALT
+        LD (33023),HL
+        ;LD A,7
+        LD A,C
+        CPL
+        LD B,2
+        EI
+        HALT
+        DJNZ $-2
+        EXA
+        EI
+        HALT
+
+;        LD HL,22528+256*1
+;        LD D,H
+;        LD E,L
+;        INC DE
+;        LD BC,256
+;        LD (HL),7*8+0
+;        LDIR
+
+        LD HL,22528+256*2
+        LD D,H
+        LD E,L
+        INC DE
+        LD BC,254
+        LD (HL),7*8+0
+        LDIR
+
+
+        LD HL,22528+256*2+27
+        LD (HL),7*8+1
+        LD D,H
+        LD E,L
+        INC DE
+        LD C,4
+        LDIR
+        LD HL,22528+256*2
+        LD DE,22528+256*2+32
+        LD BC,64
+        LDIR
+
+
+
+ZUAF1   LD A,0
+        OR A
+        JR Z,ZUAF0
+
+
+;        CP 55
+;        JR NZ,ZUAF0
+        LD HL,ZUAFT
+        LD DE,LineTXT
+        LD BC,ZUAFTS
+        LDIR
+        PUSH AF
+        RRCA
+        RRCA
+        RRCA
+        RRCA
+        CALL ZUAHEX
+        LD (DE),A
+        INC DE
+        POP AF
+        CALL ZUAHEX
+        LD (DE),A
+        INC DE
+        XOR A
+        LD (DE),A
+        JP ZUAF
+ZUAFT   DB "ZUAF="
+ZUAFTS  EQU $-ZUAFT
+
+ZUAHEXT DB '0123456789ABCDEF'
+ZUAHEX  AND 15
+        PUSH HL DE
+        LD H,0
+        LD L,A
+        LD DE,ZUAHEXT
+        ADD HL,DE
+        LD A,(HL)
+        POP DE HL
+        RET
+
+
+
+ZUAF0
+
+        IM 1
+        LD A,63
+        LD I,A
+
+        LD HL,INFAYNONE
+        LD DE,TXTWS
+        CALL INFCOPY
+
+        LD A,(LOA.AY_MODE)
+        LD E,7*8+COLINFE
+        LD HL,INFAYNONE
+        OR A
+        JR Z,ZUFFx1
+        LD E,7*8+COLINF
+        LD HL,INFAYSINGLE
+        DEC A
+        JR Z,ZUFFx1
+        LD HL,INFAYTWO
+        DEC A
+        JR Z,ZUFFx1
+        PUSH DE
+        CALL CFG_WS
+        LD A,7*8+COLINF
+        LD (TXTWS-1),A
+        LD HL,WILD_INFO
+        LD DE,TXTWS
+        CALL INFCOPY
+        LD HL,INFAYWILD
+        POP DE
+ZUFFx1  LD A,E
+        LD (TXTAY-1),A
+        LD DE,TXTAY
+        CALL INFCOPY
+
+
+        LD A,(LOA.PTR_VER)
+        LD HL,INFTY1
+        DEC A
+        JR Z,ZUFFx2
+        LD HL,INFTY2
+        DEC A
+        JR Z,ZUFFx2
+        LD HL,INFTY3
+        DEC A
+        JR Z,ZUFFx2
+        LD HL,INFTY4
+        DEC A
+        JR Z,ZUFFx2
+        LD HL,INFTY5
+        DEC A
+        JR Z,ZUFFx2
+        LD HL,INFTY128
+        CP 64
+        JR NC,ZUFFx2
+        LD HL,INFTY0
+ZUFFx2  LD DE,TXTZX
+        CALL INFCOPY
+
+
+;        CALL BOLD_FNT
+
+        LD HL,TEXT
+        CALL PRINT
+
+
+;        LD A,50*1
+;        CALL DelayINTA
+
+
+;        LD A,6
+;        OUT (254),A
+
+;        JR $
+
+;        Include "setup.az8"
+
+
+STAx4
+
+
+
+;        XOR A
+;        OUT (254),A
+
+ZUAF:
+
+        LD BC,32765
+        LD A,23
+        OUT (C),A
+        LD HL,16384
+        LD DE,49152
+        LD BC,6912
+        LDIR
+        LD BC,32765
+        LD A,16
+        OUT (C),A
+
+OLD_SP  LD SP,0
+        IM 1
+        LD A,63
+        LD I,A
+        LD HL,LOA.DST
+        LD DE,LOD.START
+        PUSH DE
+        LD BC,LOA.DSI
+        LDIR
+
+        CALL DEL_SPACE_STR
+        CALL CALC_CRC16_STR
+        LD (LOA.CRC),DE
+        LD HL,LineTXT
+        LD DE,LOA.KEY
+        LD BC,32
+        LDIR
+
+        RET
+
+WSPWM0A EQU 180
+WSPWM0B EQU 128
+WSPWM0C EQU 192
+
+WSPWM1A EQU 190
+WSPWM1B EQU 200
+WSPWM1C EQU 128
+
+CFDTA   DB WSPWM0A,WSPWM0B,WSPWM0C
+        DB WSPWM1A,WSPWM1B,WSPWM1C
+
+; A=REG
+;HL=DATA
+AY_WRHL:PUSH DE
+        LD E,A
+        LD D,(HL)
+        INC HL
+        CALL AY_WR
+        POP DE
+        RET
+
+CFG_WS: LD HL,CFDTA
+        LD A,255
+        CALL CFG_W0
+        LD A,254
+CFG_W0: CALL AY_REG
+        LD A,24
+        CALL AY_WRHL
+        INC A
+        CALL AY_WRHL
+        INC A
+        CALL AY_WRHL
+        RET
+
+
+
+COLTXT  EQU 0
+COLINF  EQU 1
+COLINFE EQU 2
+TXTISIZ EQU 16
+
+
+TEXT    DB 22,0,8,  17,7*8+COLTXT
+        DB "      AY Mode", 17,7*8+2,"|"
+        DB 17,7*8+COLINFE
+TXTAY   DS TXTISIZ
+        DB 22,0,9,  17,7*8+COLTXT
+        DB "   Wild Sound", 17,7*8+2,"|"
+        DB 17,7*8+COLINFE
+TXTWS   DS TXTISIZ
+        DB 22,0,10, 17,7*8+COLTXT
+        DB "  Speccy Type", 17,7*8+2,"|"
+        DB 17,7*8+COLINF
+TXTZX   DS TXTISIZ
+        DB 0
+
+        .MAC_TXTSZM û
+;         DS TXTISIZ
+;         ORG @.
+;         DB @.0
+;         ORG @.+TXTISIZ
+         DB @.0
+         DB 0
+        ..
+
+INFAYNONE        MAC_TXTSZM "None"
+INFAYSINGLE      MAC_TXTSZM "Single Chip"
+INFAYTWO         MAC_TXTSZM "Turbo Sound"
+INFAYWILD        MAC_TXTSZM "Wild Sound"
+INFTY0           MAC_TXTSZM "Uncnown"
+INFTY1           MAC_TXTSZM "Pentagon"
+INFTY2           MAC_TXTSZM "Spectrum 128"
+INFTY3           MAC_TXTSZM "Scorpion"
+INFTY4           MAC_TXTSZM "Spectrum Lvov"
+INFTY5           MAC_TXTSZM "Turbo Mode"
+INFTY128         MAC_TXTSZM "TS-CONF Pentagon"
+
+
+
+
+
+;HL - FROM (ZERRO ENT)
+;DE - TO
+INFCOPY:LD B,TXTISIZ
+INCPx1  LD A,(HL)
+        INC HL
+        OR A
+        JR Z,INCPx2
+        LD (DE),A
+        INC DE
+        DJNZ INCPx1
+        RET
+INCPx2  LD A,32
+        LD (DE),A
+        INC DE
+        DJNZ INCPx2
+        RET
+
+
+
+BEEP:   LD DE,0005H     ;001EH=BASIC(1981) 0005H=TR-DOS 0000H=BASIC(1988)
+        LD HL,00C8H
+        CALL 949
+        LD A,7
+        OUT (254),A
+        RET
+
+
+FONT    IncBIN "GFX\F8X8-B.FNT"
+
+;BOLD_FNT:
+;        LD HL,FNTBAS
+;        LD E,96
+;BOFx1   CALL BOFx0
+;        DEC E
+;        JR NZ,BOFx1
+;        RET
+;BOFx0:  LD B,8
+;BOFx3   LD A,(HL)
+;        AND 11100000B
+;        RRCA
+;        OR (HL)
+;        LD (HL),A
+;        AND 00011111B
+;        RLCA
+;        OR (HL)
+;        LD (HL),A
+;        INC HL
+;        DJNZ BOFx3
+;        RET
+
+
+
+;PR_X    DB 0
+;PR_Y    DB 0
+; A=CHAR
+;BC=X,Y
+; E=COLOR
+PR0:    PUSH HL DE
+        LD L,A
+        LD H,0
+        ADD HL,HL
+        ADD HL,HL
+        ADD HL,HL
+        LD DE,FONT;-256
+        ADD HL,DE
+        EX DE,HL
+        LD A,B
+        RRCA
+        RRCA
+        RRCA
+        AND 11100000B
+        ADD A,C
+        LD L,A
+        LD A,B
+        AND 00011000B
+        OR 64
+        LD H,A
+        PUSH HL
+        CALL PR0x0
+        POP HL
+        LD A,H
+        RRCA
+        RRCA
+        RRCA
+        AND 00000111B
+        LD H,A
+        OR 88
+        LD H,A
+        POP DE
+        LD (HL),E
+        POP HL
+        RET
+PR0x0:  CALL PR0x3
+PR0x3:  CALL PR0x2
+PR0x2:  CALL PR0x1
+PR0x1:  LD A,(DE)
+        LD (HL),A
+        INC DE
+        INC H
+        RET
+;HL=TEXT
+;BC=YX
+; E=COLOR
+PRINT:  LD D,0  ;DELAY+BEEP
+PRLOOP  LD A,(HL)
+        INC HL
+        OR A
+        RET Z
+        CP 22
+        JR NZ,PR1
+        LD C,(HL)
+        INC HL
+        LD B,(HL)
+        INC HL
+        JR PRLOOP
+PR1     CP 17
+        JR NZ,PR2
+        LD E,(HL)
+        INC HL
+        JR PRLOOP
+PR2     CP 7
+        JR NZ,PR3
+        PUSH HL DE BC
+        CALL BEEP
+        POP BC DE HL
+        JR PRLOOP
+PR3     CP 18
+        JR NZ,PR4
+        LD A,(HL)
+        INC HL
+        CALL DelayINTA
+        JR PRLOOP
+PR4     CP 8
+        JR NZ,PR5
+        DEC C
+        JR PRLOOP
+PR5     CP 19
+        JR NZ,PR6
+        LD D,(HL)
+        INC HL
+        JR PRLOOP
+PR6     CALL PR0
+        INC C
+        LD A,D
+        OR A
+        JR Z,PRLOOP
+        PUSH HL DE BC
+        CALL BEEP
+        POP BC DE HL
+        LD A,D
+        CALL DelayINTA
+        JR PRLOOP
+
+
+DelayINTA:
+        OR A
+        RET Z
+        EI
+        HALT
+        DEC A
+        JR DelayINTA
+
+
+
+
+
+
+INTHALT:PUSH BC
+        AND 7
+        OUT (254),A
+        LD L,A
+        RLCA
+        RLCA
+        RLCA
+        OR L
+        LD HL,22528
+        LD DE,22529
+        LD BC,767
+        LD (HL),A
+        LDIR
+        POP BC
+        RET
+
+
+
+LineTXT DS 2
+;-----------------------------------------------------------
+        Include "DETECT.AZ8"
+;-----------------------------------------------------------
+
+
+
+
+
+DEL_SPACE_STR:
+        LD HL,LineTXT
+        LD B,0
+DSSx2   LD A,(HL)
+        OR A
+        JR Z,DSSx1
+        INC B
+        INC HL
+        JR DSSx2
+DSSx1
+        LD A,B
+        OR A
+        RET Z
+DSSx3   DEC HL
+        LD A,(HL)
+        XOR 32
+        RET NZ
+        LD (HL),A
+        DJNZ DSSx3
+        RET
+
+CALC_CRC16_STR:
+        LD HL,LineTXT
+        LD DE,0FFFFH
+CACSx1  LD A,(HL)
+        OR A
+        RET Z
+        CALL CRC16DE
+        INC HL
+        JR CACSx1
+
+;CRC16   DW 0FFFFH
+;   M=(( CRC SHR 8) AND $0FF)
+;   N=M XOR (C)
+;   RESULT := CRC16TAB[N] XOR (CRC SHL 8);
+; A=DATA
+;BC=CRC16
+CRC16DE:PUSH HL
+        XOR D
+        LD H,HIGH(CRC_TBL)+1
+        LD L,A
+        LD A,(HL)
+        XOR E
+        LD D,A
+        DEC H
+        LD E,(HL)
+        POP HL
+        RET
+
+
+
+MIR_EAX_CRCS32:CALL MIR_EAX_CRCS16
+MIR_EAX_CRCS16:CALL MIR_EAX_CRCS08
+MIR_EAX_CRCS08:CALL MIR_EAX_CRCS04
+MIR_EAX_CRCS04:CALL MIR_EAX_CRCS02
+MIR_EAX_CRCS02:CALL MIR_EAX_CRCS01
+MIR_EAX_CRCS01:
+        PUSH IX
+        EX (SP),HL
+        SRL H
+        RR L
+        EX (SP),HL
+        POP IX
+        RR B
+        RR C
+        RL L
+        RL H
+        RL E
+        RL D
+        RET
+
+;IXBC CRC_START
+;DEHL TEMP_EAX
+;A-MODE
+CRC_GEN:
+        PUSH HL
+
+
+        LD HL,CRGE08B
+        BIT 1,A;(IX+8)    ;TEST  8-BIT
+        JR NZ,CRGEx7
+        LD HL,CRGE16B
+        BIT 2,A;(IX+8)    ;TEST 16-BIT
+        JR NZ,CRGEx7
+        LD HL,CRGE32B
+CRGEx7  LD (CRGEx6+1),HL
+
+        LD HL,CRGEx0A
+        BIT 0,A;(IX+8)    ;TEST REVERT
+        JR NZ,CRGEx9
+        LD HL,CRGEx0B
+        BIT 1,A;(IX+8)    ;TEST  8-BIT
+        JR NZ,CRGEx9
+        LD HL,CRGEx0C
+        BIT 2,A;(IX+8)    ;TEST 16-BIT
+        JR NZ,CRGEx9
+        LD HL,CRGEx0D
+CRGEx9  PUSH BC
+        LD DE,CRGEx01
+        LD BC,8
+        LDIR
+        LD DE,CRGEx4
+        LD C,6
+        LDIR
+        POP BC
+
+
+        LD L,C
+        LD H,B
+        PUSH IX
+        POP DE
+        BIT 0,A;(IX+8)    ;TEST REVERT
+        JR Z,CRGEx1
+        CALL MIR_EAX_CRCS32
+        BIT 3,A;(IX+8)    ;TEST 32-BIT
+        JR NZ,CRGEx1
+        EX DE,HL
+        LD DE,0
+        BIT 2,A;(IX+8)    ;TEST 16-BIT
+        JR NZ,CRGEx1
+        LD L,H
+        LD H,D
+CRGEx1  LD A,L
+        LD (CRGExo0+1),A
+        LD A,H
+        LD (CRGExo1+1),A
+        LD A,E
+        LD (CRGExo2+1),A
+        LD A,D
+        LD (CRGExo3+1),A
+
+CRGEx4  DS 6
+
+        CALL CRGEx08
+
+;STORE DATA IN TABLE
+        LD C,H
+        LD A,L
+        POP HL
+        LD (HL),A
+        PUSH HL
+        INC H
+CRGEx6  CALL CRGE08B
+        POP HL
+        INC L
+        PUSH HL
+        LD HL,CRGEx4+1
+        INC (HL)
+        JR NZ,CRGEx4
+
+
+        POP HL
+        RET
+
+
+CRGE16B:LD (HL),C
+CRGE08B:RET
+CRGE32B:LD (HL),C
+        INC H
+        LD (HL),E
+        INC H
+        LD (HL),D
+        RET
+
+
+CRGEx08:CALL CRGEx04
+CRGEx04:CALL CRGEx02
+CRGEx02:CALL CRGEx01
+CRGEx01:DS 8
+CRGEx0E RET NC
+        EXA
+        LD A,L
+CRGExo0 XOR 0
+        LD L,A
+        LD A,H
+CRGExo1 XOR 0
+        LD H,A
+        LD A,E
+CRGExo2 XOR 0
+        LD E,A
+        LD A,D
+CRGExo3 XOR 0
+        LD D,A
+        EXA
+        RET
+;REVERT
+CRGEx0A SRL D
+        RR E
+        RR H
+        RR L
+        LD HL,0
+        LD DE,0
+;8-BIT
+CRGEx0B SLA L
+        DS 2
+        DS 2
+        DS 2
+        LD HL,0
+        LD DE,0
+
+;16-BIT
+CRGEx0C SLA L
+        RL H
+        DS 2
+        DS 2
+        LD H,0
+        LD L,0
+        LD D,L
+        LD E,L
+
+;32-BIT
+CRGEx0D SLA L
+        RL H
+        RL E
+        RL D
+        LD D,0
+        LD E,0
+        LD L,E
+        LD H,E
+
+LOA.DST IncBIN "CODE\loados.cod"
+LOA.DSI EQU $-LOA.DST
+
+
+LODPIC  IncBIN "GFX\LOADING\loading.scr"
+        EQU LODPICSIZE=$-LODPIC-1
+        ORG LODPIC
+        MAC_LZSA_PACK LODPICSIZE
+LODPICEND EQU $
+
+
+FREE    EQU $
+        ALIGN 256
+CRC_TBL DS 256*2
+        ORG FREE
+
+
+
+
+
+
+
+_SIZE  EQU $-_START
+       ORG _START
+       MAC_LZSA_PACK _SIZE
+__SIZE EQU $-_START
+       MoveMEMAA _START,__START,__SIZE
+       ORG __START+__SIZE
+_END   EQU $
+       .64
+        DB 'Speccy '
+       ..
+       ORG _END
+
+LOA.END  EQU $
+LOA.SIZE EQU LOA.END-LOA.START
+
+;23476
+;23296-12 BYTE FREE = 23540
+LOA.KEY_MODE   EQU 23541
+LOA.AY_MODE    EQU 23542
+LOA.PTR_VER    EQU 23543 ;x1 5BF7H
+LOA.SAV_TRK    EQU 23544 ;x2 18432-2
+LOA.SAV_DRV    EQU 23546 ;x1 18432-2-2
+LOA.PTR_RNDx8  EQU 23547 ;x1
+LOA.PTR_RNDx4  EQU 23548 ;x1
+LOA.PTR_RNDx2  EQU 23549 ;x1
+LOA.PTR_MEM    EQU 23550 ;x1
+LOA.PTR_ZUAF   EQU 23551 ;x1
+
+
+
+        .SaveBLK ,û
+         ORG @.1.SIZE
+         ORGALI 256
+@.1.ASIZE EQU $
+@.1.B     EQU HIGH(@.1.ASIZE)
+         ORG @.
+         SaveBIN @.0,@.1.START,@.1.ASIZE
+        ..
+;        SaveBIN "CODE\loader.cod",LOA.START,LOA.SIZE
+        SaveBLK "CODE\loader.cod",LOA
+
+        ASAM.Label LOA.START
+        ASAM.Label LOA.END
+        ASAM.Label LOA.SIZE
+        ASAM.Label LOA.ASIZE
+        ASAM.Label LOA.B
+        ASAM.Label LOA.PTR_MEM
+        ASAM.Label LOA.PTR_VER
+        ASAM.Label LOA.SAV_TRK
+        ASAM.Label LOA.SAV_DRV
+        ASAM.Label LOA.PTR_ZUAF
+        ASAM.Label LOA.AY_MODE
+        ASAM.Label LOA.PTR_RNDx8
+        ASAM.Label LOA.PTR_RNDx4
+        ASAM.Label LOA.PTR_RNDx2
+        ASAM.Label LOA.KEY_MODE
+        ASAM.Label.Save "loader.inc"
+
+
+        SaveLabels "%$ASAM.Compile.FileName%.txt"

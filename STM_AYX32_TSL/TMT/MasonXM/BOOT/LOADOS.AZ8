@@ -1,0 +1,854 @@
+
+        EQU $ASAM.PASS.ERROR=2
+
+        Include "asam_l.az8"
+        Include "DOS\doslzsa.inc"
+;        Include "main.inc"
+
+StreamPTR EQU 32768 ;ZATYCHKA
+
+LOD.START EQU 16384
+SYS.START EQU 23552
+SYS.END   EQU DOS.STACK
+SYS.SIZE  EQU SYS.END-SYS.START
+DOS_OFS   EQU 32                ;OFFSET FOR DEPACKER
+LOA_CMDBS EQU 32+32                ;COMMAND BUFFER
+LOA_CMDBO EQU 16                ;OVERFLOW FOR REFRESH BUFFER
+
+        .MAC_LADD()û
+         EQU CMD.@.0=LOW(CMD_@.0-LOA_JR-2)
+         ASAM.Label CMD.@.0
+CMD_@.0  EQU $
+        ..
+
+        ORG LOD.START
+
+        LD HL,(23796)
+        CALL DOS_TR_HL
+        LD (LOA_TRSEC),HL
+        JR MLOOPR
+LORDMEM:EXA
+        LD E,(HL)
+        INC HL
+        LD D,(HL)
+        INC HL
+        LD A,E
+        INC D
+        DEC D
+        JR Z,LRMx1
+        LD A,(DE)
+LRMx1   LD C,A
+        LD E,(HL)
+        INC HL
+        LD D,(HL)
+        INC HL
+        LD A,E
+        INC D
+        DEC D
+        JR Z,LRMx2
+        LD A,(DE)
+LRMx2   LD B,A
+        LD (CMD_PTR),HL
+        JR MLOOPJ
+
+MLOOPS  INC HL
+        INC HL
+        LD (CMD_PTR),HL
+        JR MLOOP
+MLOOPOK EXA
+        JR MLOOPJJ
+
+
+MAC_LADD(COM1)  ;<
+        LD A,C
+        SUB B
+        JR C,MLOOPOK
+        JR MLOOPS
+MAC_LADD(COM2)  ;<=
+        LD A,C
+        SUB B
+        JR C,MLOOPOK
+        JR Z,MLOOPOK
+        JR MLOOPS
+MAC_LADD(COM3)  ;=
+        LD A,C
+        XOR B
+        JR Z,MLOOPOK
+        JR MLOOPS
+MAC_LADD(COM4)  ;=>
+        LD A,B
+        SUB C
+        JR C,MLOOPOK
+        JR Z,MLOOPOK
+        JR MLOOPS
+MAC_LADD(COM5)  ;>
+        LD A,B
+        SUB C
+        JR C,MLOOPOK
+        JR MLOOPS
+MAC_LADD(COM6)  ;<>
+        LD A,B
+        XOR C
+        JR NZ,MLOOPOK
+        JR MLOOPS
+
+MAC_LADD(II)    ;GoSubIF
+        LD A,CMD.GG
+        JR LORDMEM
+MAC_LADD(I)     ;GoTOIF
+        LD A,CMD.G
+        JR LORDMEM
+
+
+MLOOPR  CALL Load_CMD_Level
+MLOOP   CALL Check_CMD_Overflow
+
+CMD_PTR EQU $+1
+        LD HL,LOA_CMD   ;+LOA_CMDBS
+MLOOPJ  LD A,(HL)
+        INC HL
+MLOOPJJ LD (LOA_JR+1),A
+LOA_JR  JR $
+
+
+
+MAC_LADD(L)
+        CALL LoLOAD
+        JR MLOOP
+
+
+MAC_LADD(U)
+        CALL LoLOAD
+        CALL LoFLUSH
+
+        LD HL,(LoADDR)
+        LD BC,(LoSIZE)
+        CALL DEPACKS
+
+        CALL LoFLUSH
+        JR MLOOP
+
+MAC_LADD(X)
+        CALL LoXARA
+        JR MLOOP
+MAC_LADD(XX)
+        CALL LoXARAP
+        JR MLOOP
+
+
+MAC_LADD(E)
+        LD E,(HL)
+        INC HL
+        LD D,(HL)
+        INC HL
+        LD (CMD_PTR),HL
+        LD (LO_EXEC+1),DE
+        CALL LoFLUSH
+LO_EXST LD HL,0
+LO_EXSI LD BC,0 ;(LoSIZE)
+LO_EXEC CALL 0
+        CALL LoFLUSH
+        JR MLOOP
+
+
+
+
+
+;//       1 - <
+;//       2 - <= =<
+;//       3 - =
+;//       4 - >= =>
+;//       5 - >
+
+MAC_LADD(GG)    ;GoSub
+        CALL GetCMD_OFS
+        INC DE
+        INC DE
+        INC DE
+        PUSH DE
+MAC_LADD(G)     ;GoTo
+        LD E,(HL)
+        INC HL
+        LD D,(HL)
+        INC HL
+MGOTO   LD (CMD_LAST_PTR+0),DE
+        LD HL,LOA_CMD
+        LD (CMD_PTR),HL
+        JR MLOOPR
+
+MAC_LADD(P)
+        LD A,(HL)
+        INC HL
+        LD (CMD_PTR),HL
+        CALL OutBC
+        JR MLOOP
+
+MAC_LADD(T)    ;RETURN
+        POP DE
+        JR MGOTO
+
+MAC_LADD(K)     ;Start Key Encoding Input Data
+        LD A,(LOA.CRC+0)
+        XOR (HL)
+        LD E,A
+        INC HL
+        LD A,(LOA.CRC+1)
+        XOR (HL)
+        OR E
+        INC HL
+        LD E,(HL)
+        INC HL
+        LD D,(HL)
+        INC HL
+        LD (CMD_PTR),HL
+        JR NZ,MGOTO
+        LD HL,LOA.KEY
+        LD (LoOBxKE+1),HL
+        JP MLOOP
+;MAC_LADD(KK)    ;Stop Key Encoding Input Data
+;        JR MLOOP
+
+
+
+
+CMD_LAST_PTR DB 0,0
+
+GetCMD_OFS:
+        PUSH HL
+        LD HL,(CMD_PTR)
+        LD DE,0-LOA_CMD
+        ADD HL,DE
+        LD DE,(CMD_LAST_PTR)
+        ADD HL,DE
+        LD E,H
+        EX DE,HL
+        POP HL
+        RET
+
+;5B3C - DE=5C92 - 5CA2
+;5B88 - LD C,A - error ????
+
+;HL=PACK ADDR
+;BC=PACK SIZE
+DEPACKS:LD E,(HL)       ;DEPACK SIZE
+        INC HL
+        LD D,(HL)
+        LD (LO_EXSI+1),DE
+        LD (DO_L0x6+1),HL ;START DEPACK DATA-1
+        DEC BC
+        DEC BC          ;PACKED SIZE
+        ADD HL,BC       ;END DEPACK POINTER
+        LD (DO_L0x5+1),BC
+        PUSH HL
+        INC HL
+        SBC HL,DE
+        LD (LO_EXST+1),HL
+        LD (DO_L0x4+1),HL  ;DEPACK ADDRES
+        POP HL
+        LD BC,DOS_OFS;-1 ;COLLISION OFFEST
+        ADD HL,BC
+        JR C,DO_L0x3
+        PUSH HL
+         CALL DO_L0x7
+        POP DE
+DO_L0x5 LD BC,0
+        LDDR
+        EX DE,HL
+        INC HL
+DO_L0x4 LD DE,0
+        CALL DEPACKLZSA
+        LD HL,DOS_TEM
+        LD BC,DOS_OFS
+        LDIR
+        RET
+
+DO_L0x3 PUSH DE
+        LD HL,(DO_L0x4+1)
+        DEC HL
+         CALL DO_L0x7
+        EX DE,HL
+        INC DE
+DO_L0x6 LD HL,0
+        INC HL
+        CALL DEPACKLZSA
+        DEC DE
+        LD L,E
+        LD H,D
+        LD BC,DOS_OFS
+        ADD HL,BC
+        EX DE,HL
+        POP BC
+        LDDR
+        LD HL,DOS_TEM+DOS_OFS-1
+DO_L0x8 LD BC,DOS_OFS
+        LDDR
+        RET
+
+DO_L0x7 LD DE,DOS_TEM+DOS_OFS-1
+        JR DO_L0x8
+
+;DEPACKS:LD A,H
+;        CP 192
+;        JR C,DO_L0x1
+;
+;        PUSH HL BC
+;        LD BC,DOS_OFS
+;        LD DE,DOS_TEM+DOS_OFS-1
+;        DEC HL
+;        LDDR
+;        POP BC
+;        INC HL
+;        EX (SP),HL
+;
+;        LD DE,0-DOS_OFS
+;        PUSH HL HL
+;        ADD HL,DE
+;        POP DE
+;        EX DE,HL
+;        LDIR
+;        EX DE,HL
+;        DEC HL
+;        POP DE
+;        CALL DEPACKX
+;
+;        POP DE
+;        PUSH BC
+;        LD HL,DOS_TEM
+;        LD BC,DOS_OFS
+;        LDIR
+;        POP BC
+;        RET
+;        ;DEPACK PTR<192
+;DO_L0x1 LD (DO_L0x2+1),HL
+;        PUSH HL
+;        LD E,L
+;        LD D,H
+;        ADD HL,BC
+;        DEC HL
+;        EX DE,HL
+;        LD BC,DOS_OFS
+;        ADD HL,BC
+;        EX DE,HL
+;        PUSH DE HL
+;        DEC HL
+;        LD D,(HL)
+;        DEC HL
+;        LD E,(HL)
+;DO_L0x2 LD HL,0
+;        ADD HL,DE
+;        LD DE,DOS_TEM
+;        LDIR
+;        POP HL DE
+;        PUSH DE
+;        CALL DEPACKX
+;        POP HL DE
+;        PUSH BC
+;        LDIR
+;        LD HL,DOS_TEM
+;        LD BC,DOS_OFS
+;        LDIR
+;        POP BC
+;        RET
+
+DOS_TEM EQU LZSA.END
+
+
+
+
+
+LoFLUSH:DI
+        PUSH HL DE BC AF IX
+LoFLx1  LD A,0
+        INC A
+        LD (LoFLx1+1),A
+        RRCA
+        LD HL,SYS.BUF
+        LD DE,SYS.START
+        LD BC,SYS.SIZE
+        LD IX,SYS.BUF-SYS.START
+        JR C,LoFLx2
+        LD IX,SYS.START-SYS.BUF
+LoFLx2  LD A,(DE)
+        LDI
+        DEC HL
+        LD (HL),A
+        INC HL
+        JP PE,LoFLx2
+        ADD IX,SP
+        LD SP,IX
+        POP IX AF BC DE HL
+        RET
+
+;        CALL Load_CMD_Level
+;M1      LD HL,(CMD_PTR)
+;        LD DE,8
+;        ADD HL,DE
+;        LD (CMD_PTR),HL
+;        CALL Check_CMD_Overflow
+;        JR M1
+
+
+;
+;        LD HL,LOA_CMD
+;        LD B,1
+;        CALL DOS.LoadTR
+;        JP 30000
+;
+;CMD_PTR EQU $+1
+;        LD HL,LOA_CMD+LOA_CMDBS
+;        CALL Load_CMD_Level
+
+Check_CMD_Overflow:
+        LD HL,(CMD_PTR)
+        LD DE,0-(LOA_CMD+LOA_CMDBS-LOA_CMDBO)
+        ADD HL,DE
+        RET NC
+
+Load_CMD_Level:
+
+;        LD HL,(CMD_PTR)
+;        LD DE,0-LOA_CMD
+;        ADD HL,DE
+;        EX DE,HL
+;        LD HL,LOA_CMDBS
+;        AND A
+;        SBC HL,DE
+;        LD C,L
+;        LD B,H
+;        LD HL,(CMD_PTR)
+;        LD DE,LOA_CMD
+;        LD (CMD_PTR),DE
+;        PUSH BC
+;        LD A,B
+;        OR C
+;        JR Z,LoCLx1
+;        LDIR
+;LoCLx1  POP BC
+;        LD HL,LOA_CMDBS
+;        AND A
+;        SBC HL,BC
+;        LD C,L
+;        LD B,H
+;        EX DE,HL
+;
+;LoCMDE  LD DE,0
+;LoCMA   LD A,0
+
+        CALL GetCMD_OFS
+        LD (CMD_LAST_PTR+0),DE
+        LD A,E
+        LD E,D
+        LD D,0
+
+;        LD (CMD_LAST_PTR+0),A
+;        LD (CMD_LAST_PTR+1),DE
+
+        LD HL,LOA_CMD
+        LD (CMD_PTR),HL
+        LD BC,LOA_CMDBS
+        CALL LoadOFSBLK
+;        LD (LoCMDE+1),DE
+;        LD (LoCMA+1),A
+
+        RET
+
+OutBC:  PUSH BC
+OutPageADDR EQU $+1
+        LD BC,32765
+        OUT (C),A
+        POP BC
+        RET
+
+LoADDR  DW 0
+LoSIZE  DW 0
+LoLOADR:LD A,(HL)
+        INC HL
+        LD E,(HL)
+        INC HL
+        LD D,(HL)
+        INC HL
+        PUSH DE
+        LD E,(HL)
+        INC HL
+        LD D,(HL)
+        INC HL
+        LD C,(HL)
+        INC HL
+        LD B,(HL)
+        INC HL
+        LD (CMD_PTR),HL
+        EX DE,HL
+        POP DE
+        LD (LoADDR),HL
+        LD (LoSIZE),BC
+        RET
+
+
+XARAADR:LD HL,StreamPTR
+        PUSH AF
+XARAPAG LD A,16
+        CALL OutBC
+        POP AF
+        RET
+
+;BC-OFFSET
+XARAABC:PUSH HL AF
+        LD HL,(XARAADR+1)
+        LD A,(XARAPAG+1)
+        ADD HL,BC
+        JR NC,XABCx1
+        SET 7,H
+        SET 6,H
+        INC A
+        CP 18
+        JR Z,XABCx2
+        CP 21
+        JR NZ,XABCx1
+XARASKIP EQU $
+XABCx2  INC A
+XABCx1  LD (XARAADR+1),HL
+        LD (XARAPAG+1),A
+        POP AF HL
+        RET
+
+
+
+; A=BYTE
+XARADDB:PUSH HL
+        CALL XARAADR
+        LD (HL),A
+        POP HL
+XARAINC:PUSH BC
+        LD BC,1
+        CALL XARAABC
+        POP BC
+        RET
+
+;LOW:XXXXXXXX - LOW SIZE
+;HIG:0XXXXXXX - LOAD
+;    10XXXXXX - UNPACK
+;    11XXXXXX - EXT
+;EXT:XX000000 - LOAD
+;    XX000001 - UNPACK
+
+LoXARAP:CALL LoLOADR
+        PUSH AF
+        SCF
+        JR LoXAx3
+
+LoXARA: CALL LoLOADR
+        PUSH AF
+        AND A
+LoXAx3  PUSH AF
+        LD A,L  ;XARA ID
+        CALL XARADDB
+        LD A,H  ;XARA ID
+        CALL XARADDB
+        LD A,C
+        CALL XARADDB
+        POP AF
+        LD A,B
+        BIT 7,A
+        JR NZ,LoXAx4
+        JR NC,LoXAx5
+        SET 7,A
+        BIT 6,A
+        JR Z,LoXAx5
+LoXAx4  PUSH AF
+        OR 11000000B
+        CALL XARADDB
+        POP AF
+        LD A,B
+        RES 0,A
+        JR NC,LoXAx5
+        SET 0,A
+LoXAx5  CALL XARADDB
+
+LoXAx2  LD A,B
+        OR C
+        JR NZ,LoXAx1
+        POP AF
+        RET
+LoXAx1  POP AF
+        CALL XARAADR
+        CALL LoadOFSBLK
+        PUSH BC
+LoOBLBCX LD BC,0
+        CALL XARAABC
+        POP BC
+        PUSH AF
+        JR LoXAx2
+
+
+
+
+
+
+;BC OFFSET
+LoLOAD: CALL LoLOADR
+        LD (LO_EXST+1),HL
+        LD (LO_EXSI+1),BC
+; HL = ADDR
+;DEA = OFFSET
+; BC = SIZE IN BYTES
+LoadOFSBLK:
+        PUSH HL
+        ADD HL,BC
+        LD (LoOBLx4+1),HL
+        POP HL
+        JR NC,LoOBLx5
+        PUSH AF
+        LD A,L
+        CPL
+        LD C,A
+        LD A,H
+        CPL
+        LD B,A
+        INC BC
+        POP AF
+        CALL LoOBLx5
+LoOBLx4 LD BC,0
+        RET
+LoOBLx5 LD (LoOBLBCX+1),BC
+LoOBLx3 LD (LoOBLA+1),A
+        LD (LoOBLDE+1),DE
+;        LD (LoOBLHL+1),HL
+
+
+        EX DE,HL
+
+        LD HL,SYS.START-1
+        AND A
+        SBC HL,DE
+
+        JR C,LoOBLx1
+        INC HL
+        LD (LoOBLBC+1),HL
+        SBC HL,BC
+        EX DE,HL
+        JR NC,LoOBLA
+        CALL LoOBLx0
+        JR LoOBLx3
+
+LoOBLx1 LD HL,SYS.END-1
+        AND A
+        SBC HL,DE
+        JR C,LoOBLx2
+        INC HL
+        LD (LoOBLBC+1),HL
+        SBC HL,BC
+
+        PUSH AF DE
+        EX DE,HL
+        LD DE,SYS.START
+        AND A
+        SBC HL,DE
+        LD DE,SYS.BUF
+        ADD HL,DE
+        POP DE AF
+
+        JR NC,LoOBLA
+        CALL LoOBLx0
+        LD HL,SYS.END
+        JR LoOBLx3
+
+LoOBLx2 EX DE,HL
+        JR LoOBLA
+
+LoOBLx0:EX DE,HL
+        LD H,B
+        LD L,C
+        LD BC,(LoOBLBC+1)
+        AND A
+        SBC HL,BC
+        PUSH HL
+        EX DE,HL
+        CALL LoOBLBC
+        POP BC
+        RET
+
+LoOBLBC LD BC,0
+LoOBLA  LD A,0
+LoOBLDE LD DE,0
+;LoOBLHL LD HL,0
+        BIT 7,D
+        JR Z,LoOBLLL
+        RES 7,D
+        LD (LoOBxHL+1),HL
+        LD (LoOBxBC+1),BC
+        CALL LoOBLLL
+        SET 7,D
+        PUSH HL DE BC AF
+LoOBxKE LD DE,LOA.KEY
+LoOBxHL LD HL,0
+LoOBxBC LD BC,0
+        ;LD BC,(LoOBLBC+1);(LoOBLBCX+1)
+LOSBx5  LD A,B
+        OR C
+        JR Z,LOSBx4
+        LD A,(DE)
+        OR A
+        JR NZ,LOSBx6
+        LD DE,LOA.KEY
+        LD A,(DE)
+LOSBx6  XOR (HL)
+        LD (HL),A
+        INC DE
+        INC HL
+        DEC BC
+        JR LOSBx5
+LOSBx4  LD (LoOBxKE+1),DE
+        POP AF BC DE HL
+        RET
+
+LoOBLLL:OR A
+        JR Z,LOSBx1
+;LOAD ONE SEC OFS
+        PUSH DE BC HL AF
+        LD HL,LOA_BUF
+        LD B,1
+        CALL LoadTROFS
+        POP AF
+        LD L,A
+        LD H,0
+        LD DE,LOA_BUF
+        ADD HL,DE
+        POP DE
+        POP BC
+        ; A=SIZE FOR MAX COPY
+        ;BC=SIZE FOR COPY
+LOSBx2  LDI
+        JP PO,LOSBx3
+        INC A
+        JR NZ,LOSBx2
+        EX DE,HL
+        POP DE
+        INC DE
+
+LOSBx1  PUSH BC
+        CALL LoadTROFS
+        POP BC
+        LD B,0
+        LD A,C
+        OR A
+        RET Z
+
+        PUSH DE HL BC
+        LD HL,LOA_BUF
+        LD B,1
+        CALL LoadTROFS
+        POP BC DE
+
+        LD A,C
+        LD HL,LOA_BUF
+        LDIR
+        EX DE,HL
+        POP DE
+
+        RET
+
+LOSBx3  EX DE,HL
+        POP DE
+        INC DE
+        INC A
+        RET Z
+        DEC DE
+        RET
+
+
+;HL=ADDR
+;DE=OFS
+; B=TRK COUNT
+LoadTROFS:
+        INC B
+        DEC B
+        RET Z
+        PUSH DE HL
+LOA_TRSEC EQU $+1
+        LD HL,0
+        ADD HL,DE
+        CALL DOS_HL_TR
+        EX DE,HL
+        POP HL
+        PUSH HL BC
+        CALL DOS.LoadTRDE
+        POP BC HL
+        LD C,0
+        ADD HL,BC
+        LD A,B
+        POP DE
+        ADD A,E
+        LD E,A
+        RET NC
+        INC D
+        RET
+
+
+DOS_HL_TR:
+        LD A,H
+        AND 00001111B
+        LD H,A
+        LD A,L
+        AND 11110000B
+        OR H
+        RLCA
+        RLCA
+        RLCA
+        RLCA
+        LD H,A
+        LD A,L
+        AND 00001111B
+        LD L,A
+        RET
+
+
+LOA.CRC DW 0FFFFH
+LOA.KEY DS 32
+
+LOA_CMD  EQU $
+LOA_BUF  EQU $+LOA_CMDBS
+SYS.BUF  EQU LOA_BUF+256
+
+
+
+
+DOS_TR_HL:
+        LD A,L
+        AND 00001111B
+        LD L,A
+        LD A,H
+        RLCA
+        RLCA
+        RLCA
+        RLCA
+        LD H,A
+        AND 11110000B
+        OR L
+        LD L,A
+        LD A,H
+        AND 00001111B
+        LD H,A
+        RET
+
+LOD.END  EQU $
+LOD.SIZE EQU LOD.END-LOD.START
+        SaveBIN "CODE\loados.cod",LOD.START,LOD.SIZE
+
+LOADER.XARAADR       EQU XARAADR+1
+LOADER.XARAPAG       EQU XARAPAG+1
+LOADER.XARASKIP      EQU XARASKIP
+LOADER.OutPageADDR   EQU OutPageADDR
+        ASAM.Label LOD.START
+        ASAM.Label LOD.END
+        ASAM.Label LOD.SIZE
+        ASAM.Label LOA.KEY
+        ASAM.Label LOA.CRC
+        ASAM.Label LOADER.XARAADR
+        ASAM.Label LOADER.XARAPAG
+        ASAM.Label LOADER.XARASKIP
+        ASAM.Label LOADER.OutPageADDR
+        ASAM.Label.Save "loados.inc"
+
+
+        SaveLabels "%$ASAM.Compile.FileName%.txt"
+

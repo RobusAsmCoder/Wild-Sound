@@ -1,0 +1,176 @@
+PCAD Importer Log
+Project : ay-arm-bot.PRJPCB
+
+Section : D:\KEIL.PRJ\STM_AYX32_TSL\DOC\SCHEMATIC\ALTIUM\TRANS\Pro\ay-arm-bot.sch
+    Section : Parsing Messages
+        Warning - 1 : Skipping Token defaultPinDes On Line 101
+        Warning - 1 : Skipping Token defaultPinDes On Line 109
+        Warning - 1 : Skipping Token defaultPinDes On Line 117
+        Warning - 1 : Skipping Token defaultPinDes On Line 125
+        Warning - 1 : Skipping Token defaultPinDes On Line 133
+        Warning - 1 : Skipping Token defaultPinDes On Line 141
+        Warning - 1 : Skipping Token defaultPinDes On Line 149
+        Warning - 1 : Skipping Token defaultPinDes On Line 157
+        Warning - 1 : Skipping Token defaultPinDes On Line 165
+        Warning - 1 : Skipping Token defaultPinDes On Line 173
+        Warning - 1 : Skipping Token defaultPinDes On Line 181
+        Warning - 1 : Skipping Token defaultPinDes On Line 189
+        Warning - 1 : Skipping Token defaultPinDes On Line 197
+        Warning - 1 : Skipping Token defaultPinDes On Line 205
+        Warning - 1 : Skipping Token defaultPinDes On Line 213
+        Warning - 1 : Skipping Token defaultPinDes On Line 221
+        Warning - 1 : Skipping Token defaultPinDes On Line 229
+        Warning - 1 : Skipping Token defaultPinDes On Line 237
+        Warning - 1 : Skipping Token defaultPinDes On Line 245
+        Warning - 1 : Skipping Token defaultPinDes On Line 253
+        Warning - 1 : Skipping Token defaultPinDes On Line 261
+        Warning - 1 : Skipping Token defaultPinDes On Line 269
+        Warning - 1 : Skipping Token defaultPinDes On Line 277
+        Warning - 1 : Skipping Token defaultPinDes On Line 285
+        Warning - 1 : Skipping Token defaultPinDes On Line 293
+        Warning - 1 : Skipping Token defaultPinDes On Line 301
+        Warning - 1 : Skipping Token defaultPinDes On Line 309
+        Warning - 1 : Skipping Token defaultPinDes On Line 317
+        Warning - 1 : Skipping Token defaultPinDes On Line 325
+        Warning - 1 : Skipping Token defaultPinDes On Line 333
+        Warning - 1 : Skipping Token defaultPinDes On Line 341
+        Warning - 1 : Skipping Token defaultPinDes On Line 349
+        Warning - 1 : Skipping Token defaultPinDes On Line 357
+        Warning - 1 : Skipping Token defaultPinDes On Line 365
+        Warning - 1 : Skipping Token defaultPinDes On Line 373
+        Warning - 1 : Skipping Token defaultPinDes On Line 381
+        Warning - 1 : Skipping Token defaultPinDes On Line 401
+        Warning - 1 : Skipping Token defaultPinDes On Line 409
+        Warning - 1 : Skipping Token defaultPinDes On Line 417
+        Warning - 1 : Skipping Token defaultPinDes On Line 425
+        Warning - 1 : Skipping Token defaultPinDes On Line 433
+        Warning - 1 : Skipping Token defaultPinDes On Line 441
+        Warning - 1 : Skipping Token defaultPinDes On Line 449
+        Warning - 1 : Skipping Token defaultPinDes On Line 457
+        Warning - 1 : Skipping Token defaultPinDes On Line 465
+        Warning - 1 : Skipping Token defaultPinDes On Line 473
+        Warning - 1 : Skipping Token defaultPinDes On Line 481
+        Warning - 1 : Skipping Token defaultPinDes On Line 489
+        Warning - 1 : Skipping Token defaultPinDes On Line 497
+        Warning - 1 : Skipping Token defaultPinDes On Line 505
+        Warning - 1 : Skipping Token defaultPinDes On Line 513
+        Warning - 1 : Skipping Token defaultPinDes On Line 521
+        Warning - 1 : Skipping Token defaultPinDes On Line 529
+        Warning - 1 : Skipping Token defaultPinDes On Line 537
+        Warning - 1 : Skipping Token defaultPinDes On Line 545
+        Warning - 1 : Skipping Token defaultPinDes On Line 553
+        Warning - 1 : Skipping Token defaultPinDes On Line 561
+        Warning - 1 : Skipping Token defaultPinDes On Line 569
+        Warning - 1 : Skipping Token defaultPinDes On Line 577
+        Warning - 1 : Skipping Token defaultPinDes On Line 585
+        Warning - 1 : Skipping Token defaultPinDes On Line 593
+        Warning - 1 : Skipping Token defaultPinDes On Line 601
+        Warning - 1 : Skipping Token defaultPinDes On Line 609
+        Warning - 1 : Skipping Token defaultPinDes On Line 617
+        Warning - 1 : Skipping Token defaultPinDes On Line 625
+        Warning - 1 : Skipping Token defaultPinDes On Line 633
+        Warning - 1 : Skipping Token defaultPinDes On Line 641
+        Warning - 1 : Skipping Token defaultPinDes On Line 649
+        Warning - 1 : Skipping Token defaultPinDes On Line 657
+        Warning - 1 : Skipping Token defaultPinDes On Line 665
+        Warning - 1 : Skipping Token defaultPinDes On Line 673
+        Warning - 1 : Skipping Token defaultPinDes On Line 681
+        Warning - 1 : Skipping Token defaultPinDes On Line 689
+        Warning - 1 : Skipping Token defaultPinDes On Line 697
+        Warning - 1 : Skipping Token defaultPinDes On Line 705
+        Warning - 1 : Skipping Token defaultPinDes On Line 713
+        Warning - 1 : Skipping Token gridDfns On Line 1072
+        Warning - 1 : Skipping Token refPointSize On Line 1094
+        Warning - 1 : Skipping Token infoPointSize On Line 1095
+        Warning - 1 : Skipping Token junctionSize On Line 1096
+        Warning - 1 : Skipping Token refPointSizePrint On Line 1097
+        Warning - 1 : Skipping Token infoPointSizePrint On Line 1098
+        Warning - 1 : Skipping Token junctionSizePrint On Line 1099
+        Warning - 1 : Skipping Token PrintRegion On Line 1183
+        Warning - 1 : Skipping Token schematicPrintSettings On Line 1187
+        Warning - 1 : Skipping Token ecoState On Line 1202
+        Warning - 1 : Skipping Token currentTextStyle On Line 1203
+        Warning - 1 : Skipping Token reportSettings On Line 1206
+    EndSection
+
+    Section : Generating SCH Library - ay-arm-bot.SchLib
+    EndSection
+
+    Section : Generating SCH Sheet - Sheet1.SCHDOC
+        Warning : Output port [AU_L] width was re-calculated to [279.062mil]
+        Warning : Output port [AY_IOB7] width was re-calculated to [398.125mil]
+        Warning : Output port [AY_IOB5] width was re-calculated to [398.125mil]
+        Warning : Output port [AY_IOB6] width was re-calculated to [398.125mil]
+        Warning : Output port [AY_IOB4] width was re-calculated to [398.125mil]
+        Warning : Output port [AY_IOB2] width was re-calculated to [398.125mil]
+        Warning : Output port [AY_IOB3] width was re-calculated to [398.125mil]
+        Warning : Output port [AY_IOB1] width was re-calculated to [398.125mil]
+        Warning : Output port [AY_IOB0] width was re-calculated to [398.125mil]
+        Warning : Output port [AY_IOA6] width was re-calculated to [398.125mil]
+        Warning : Output port [AY_IOA5] width was re-calculated to [398.125mil]
+        Warning : Output port [AY_IOA3] width was re-calculated to [398.125mil]
+        Warning : Output port [AY_IOA2] width was re-calculated to [398.125mil]
+        Warning : Output port [AY_IOA0] width was re-calculated to [398.125mil]
+        Warning : Output port [GND] width was re-calculated to [259.062mil]
+        Warning : Output port [VDD5] width was re-calculated to [290.938mil]
+        Warning : Output port [AY_CLK] width was re-calculated to [374.375mil]
+        Warning : Output port [A\Y\_\R\S\T\] width was re-calculated to [378.281mil]
+        Warning : Output port [A\Y\_\S\E\L\] width was re-calculated to [370.312mil]
+        Warning : Output port [A\Y\_\A\9\] width was re-calculated to [322.656mil]
+        Warning : Output port [AY_A8] width was re-calculated to [322.656mil]
+        Warning : Output port [AY_BDIR] width was re-calculated to [406.094mil]
+        Warning : Output port [AY_BC2] width was re-calculated to [374.375mil]
+        Warning : Output port [AY_BC1] width was re-calculated to [374.375mil]
+        Warning : Output port [Z80_D6] width was re-calculated to [354.844mil]
+        Warning : Output port [Z80_D5] width was re-calculated to [354.844mil]
+        Warning : Output port [Z80_D3] width was re-calculated to [354.844mil]
+        Warning : Output port [Z80_D2] width was re-calculated to [354.844mil]
+        Warning : Output port [Z80_D0] width was re-calculated to [354.844mil]
+        Warning : Output port [AU_R] width was re-calculated to [290.938mil]
+        Warning : Output port [AY_IOA7] width was re-calculated to [398.125mil]
+        Warning : Output port [AY_IOA4] width was re-calculated to [398.125mil]
+        Warning : Output port [AY_IOA1] width was re-calculated to [398.125mil]
+        Warning : Output port [Z80_D7] width was re-calculated to [354.844mil]
+        Warning : Output port [Z80_D4] width was re-calculated to [354.844mil]
+        Warning : Output port [Z80_D1] width was re-calculated to [354.844mil]
+        Warning : Output port [VDD5] width was re-calculated to [290.938mil]
+        Warning : Output port [GND] width was re-calculated to [259.062mil]
+        Warning : Output port [AY_CLK] width was re-calculated to [374.375mil]
+        Warning : Output port [A\Y\_\R\S\T\] width was re-calculated to [378.281mil]
+        Warning : Output port [A\Y\_\S\E\L\] width was re-calculated to [370.312mil]
+        Warning : Output port [A\Y\_\A\9\] width was re-calculated to [322.656mil]
+        Warning : Output port [AY_BDIR] width was re-calculated to [406.094mil]
+        Warning : Output port [AY_A8] width was re-calculated to [322.656mil]
+        Warning : Output port [AY_BC2] width was re-calculated to [374.375mil]
+        Warning : Output port [AY_BC1] width was re-calculated to [374.375mil]
+        Warning : Output port [Z80_D6] width was re-calculated to [354.844mil]
+        Warning : Output port [Z80_D5] width was re-calculated to [354.844mil]
+        Warning : Output port [Z80_D3] width was re-calculated to [354.844mil]
+        Warning : Output port [Z80_D2] width was re-calculated to [354.844mil]
+        Warning : Output port [Z80_D0] width was re-calculated to [354.844mil]
+        Warning : Output port [AU_R] width was re-calculated to [290.938mil]
+        Warning : Output port [AU_L] width was re-calculated to [279.062mil]
+        Warning : Output port [AY_IOB7] width was re-calculated to [398.125mil]
+        Warning : Output port [AY_IOB5] width was re-calculated to [398.125mil]
+        Warning : Output port [AY_IOB6] width was re-calculated to [398.125mil]
+        Warning : Output port [AY_IOB4] width was re-calculated to [398.125mil]
+        Warning : Output port [AY_IOB2] width was re-calculated to [398.125mil]
+        Warning : Output port [AY_IOB3] width was re-calculated to [398.125mil]
+        Warning : Output port [AY_IOB1] width was re-calculated to [398.125mil]
+        Warning : Output port [AY_IOB0] width was re-calculated to [398.125mil]
+        Warning : Output port [AY_IOA6] width was re-calculated to [398.125mil]
+        Warning : Output port [AY_IOA5] width was re-calculated to [398.125mil]
+        Warning : Output port [AY_IOA3] width was re-calculated to [398.125mil]
+        Warning : Output port [AY_IOA2] width was re-calculated to [398.125mil]
+        Warning : Output port [AY_IOA0] width was re-calculated to [398.125mil]
+        Warning : Output port [Z80_D7] width was re-calculated to [354.844mil]
+        Warning : Output port [Z80_D4] width was re-calculated to [354.844mil]
+        Warning : Output port [Z80_D1] width was re-calculated to [354.844mil]
+        Warning : Output port [AY_IOA7] width was re-calculated to [398.125mil]
+        Warning : Output port [AY_IOA4] width was re-calculated to [398.125mil]
+        Warning : Output port [AY_IOA1] width was re-calculated to [398.125mil]
+    EndSection
+
+    Section : Analyzing SCH Sheet - Sheet1.SCHDOC
+    EndSection
+EndSection

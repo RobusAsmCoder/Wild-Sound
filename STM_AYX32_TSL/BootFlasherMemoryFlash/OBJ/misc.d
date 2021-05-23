@@ -1,0 +1,9 @@
+.\obj\misc.o: ..\SRC\LIB\src\misc.c
+.\obj\misc.o: ..\SRC\LIB\inc\misc.h
+.\obj\misc.o: ..\SRC\stm32f4xx.h
+.\obj\misc.o: C:\Keil\ARM\CMSIS\Include\core_cm4.h
+.\obj\misc.o: C:\Keil\ARM\ARMCC\bin\..\include\stdint.h
+.\obj\misc.o: C:\Keil\ARM\CMSIS\Include\core_cmInstr.h
+.\obj\misc.o: C:\Keil\ARM\CMSIS\Include\core_cmFunc.h
+.\obj\misc.o: C:\Keil\ARM\CMSIS\Include\core_cm4_simd.h
+.\obj\misc.o: ..\SRC\system_stm32f4xx.h
